@@ -1,130 +1,227 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
-
+/* ─── Marvell Design Tokens ─────────────────────────────────────────── */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* Spacing */
+  --container-gutter: 20px;
+  --container-width: 1824px;
+  --container-aside: max(var(--container-gutter), calc(((100vw - var(--scrollbar, 15px)) - var(--container-width)) / 2));
+
+  --gap-component--sm: 0.25rem;
+  --gap-component--md: 0.5rem;
+  --gap-component--lg: 0.75rem;
+  --gap-component--xl: 1.125rem;
+
+  --gap-container--sm: 1rem;
+  --gap-container--md: 1.25rem;
+  --gap-container--lg: 1.5rem;
+
+  --gap-section--sm: 2rem;
+  --gap-section--md: 3rem;
+  --gap-section--lg: 5rem;
+  --gap-section--xl: 6.25rem;
+
+  --padding-section--sm: 1.5rem;
+  --padding-section--md: 3rem;
+  --padding-section--lg: 5rem;
+  --padding-section--xl: 10rem;
+
+  /* Nav */
+  --nav-height: 3rem;
+  --nav-margin: 1.5rem;
+  --nav-offset: calc(var(--nav-height) + var(--nav-margin) * 2);
+
+  /* Viewport helpers */
+  --scroll-bar-width: 0px;
+  --vw: 19.2px;
+  --vh: 10.8px;
+  --max-vh: 1000px;
+  --max-viewport-height: 100000px;
+  --min-vh: 9.93px;
+  --min-viewport-height: 993px;
+  --100svh: 100svh;
+  --100lvh: 100lvh;
+
+  /* Colors — dark theme (default) */
+  --color--bg: #35311f;
+  --color--bg-strong: #19170e;
+  --color--text-strong: #ffffff;
+  --color--text: rgba(255, 255, 255, 0.7);
+  --color--text-brand: #9b926a;
+  --color--text-subtle: rgba(255, 255, 255, 0.6);
+  --color--border: rgba(255, 255, 255, 0.3);
+  --color--border-subtle: rgba(255, 255, 255, 0.1);
+  --color--tooltip-text: #35311f;
+  --color--tooltip-bg: rgba(255, 255, 255, 0.5);
+
+  /* shadcn compat */
+  --background: #35311f;
+  --foreground: #ffffff;
+  --radius: 0.5rem;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+/* Light theme tokens (used in footer--light, NextProjectCard--dark) */
+.theme-light {
+  --color--bg: #f3efeb;
+  --color--bg-strong: #ffffff;
+  --color--text-strong: #35311f;
+  --color--text: rgba(0, 0, 0, 0.6);
+  --color--text-brand: #9b926a;
+  --color--text-subtle: rgba(0, 0, 0, 0.4);
+  --color--border: rgba(0, 0, 0, 0.3);
+  --color--border-subtle: rgba(0, 0, 0, 0.1);
+  --color--tooltip-text: #ffffff;
+  --color--tooltip-bg: rgba(0, 0, 0, 0.5);
 }
 
+/* ─── Responsive spacing overrides ──────────────────────────────────── */
+@media (min-width: 480px) {
+  :root {
+    --gap-container--md: 1.5rem;
+    --gap-section--sm: 2.5rem;
+    --gap-section--md: 3.5rem;
+    --gap-section--lg: 5.5rem;
+    --gap-section--xl: 8rem;
+    --padding-section--sm: 2.5rem;
+    --padding-section--md: 5rem;
+    --padding-section--lg: 6rem;
+    --padding-section--xl: 12.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-gutter: 48px;
+    --gap-container--sm: 1rem;
+    --gap-container--md: 1.5rem;
+    --gap-container--lg: 2rem;
+    --gap-section--sm: 3rem;
+    --gap-section--md: 4rem;
+    --gap-section--lg: 6rem;
+    --gap-section--xl: 12rem;
+    --padding-section--sm: 3rem;
+    --padding-section--md: 6rem;
+    --padding-section--lg: 8rem;
+    --padding-section--xl: 16rem;
+  }
+}
+
+/* ─── Base styles ────────────────────────────────────────────────────── */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
-    @apply font-sans;
+    font-family: var(--font-neue-montreal), "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--color--bg);
+    color: var(--color--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
   }
+
+  body {
+    background-color: var(--color--bg);
+    color: var(--color--text);
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+
+  /* Reset list styles used by nav/footer */
+  ul, ol {
+    list-style: none;
+  }
+
+  /* Button reset */
+  button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    text-rendering: geometricPrecision;
+  }
+
+  /* Link reset */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+/* ─── Typography helpers ─────────────────────────────────────────────── */
+@layer utilities {
+  .font-neue-montreal {
+    font-family: var(--font-neue-montreal), "Helvetica Neue", Arial, sans-serif;
+  }
+
+  /* Split-line text animation base */
+  .split-line {
+    overflow: hidden;
+    padding-block: 0.075em;
+    margin-block: -0.275em;
+  }
+
+  .split-line-inner {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-in .split-line-inner {
+    transform: translateY(0);
+  }
+
+  /* Visibility for JS-driven reveals */
+  .reveal-hidden {
+    visibility: hidden;
+  }
+
+  .reveal-visible {
+    visibility: visible;
+  }
+
+  /* Container with gutter */
+  .container-page {
+    padding-inline: var(--container-gutter);
+    max-width: calc(var(--container-width) + var(--container-gutter) * 2);
+    margin-inline: auto;
+  }
+}
+
+/* ─── Lenis smooth scroll ─────────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ─── Scrollbar hiding ────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 0px;
 }
