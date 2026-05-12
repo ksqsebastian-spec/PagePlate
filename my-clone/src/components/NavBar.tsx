@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect, CSSProperties } from 'react';
-import { MarvellLogo, ChevronDownIcon } from '../components/icons';
+import { MarvellLogo, ChevronDownIcon } from './icons';
 
 const NAV_ITEMS = [
   {
