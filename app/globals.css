@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-linen: #E9E4DF;
+  --color-primary: #B1A781;
+  --color-secondary: #6A6243;
+  --color-ink: #000000;
+  --color-accent: #0000FF;
+  --color-white: #ffffff;
+
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-full: 0px;
+}
+
+* {
+  border-radius: 0 !important;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #E9E4DF;
+  color: #000000;
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: #0000FF;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.em-dash::before {
+  content: '–––';
+  display: block;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+/* Condensed text for large display */
+.font-display {
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+/* Sharp rectangular selection */
+::selection {
+  background: #0000FF;
+  color: #ffffff;
+}
