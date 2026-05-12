@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+*, *::before, *::after { cursor: none !important; }
+
 /* ─── Marvell Design Tokens ─────────────────────────────────────────── */
 :root {
   /* Spacing */
