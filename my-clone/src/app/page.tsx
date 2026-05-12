@@ -6,26 +6,22 @@ import NextProjectCard from '@/components/NextProjectCard';
 import Footer from '@/components/Footer';
 import LenisProvider from '@/components/LenisProvider';
 
-const OVERVIEW_BODY = `Known as "Marvellangelo", this Applecross home became the backdrop for a tiling project that tested Marvell Tile and Stones' skill, stamina, and precision. With brick tiles laid overhead on a soaring arched ceiling, each calculation, cut, and placement became a statement of craftsmanship—a balance of engineering, artistry, and purpose.`;
+const OVERVIEW_BODY = `–––Wild Horizons is a study of the places that quiet the mind — sunset-streaked alpine peaks, palms leaning over warm coastal water, forests softened by morning fog, and the architecture that lives alongside them. Each frame is a meditation on scale, light, and the moment a landscape stops feeling like a view and starts feeling like a memory.`;
 
-const DETAILS_BODY = `For this Applecross home —nicknamed "Marvellangelo" — Marvell Tile and Stone transformed an arched ceiling into a breathtaking brick-tiled masterpiece. Precision was everything: every tile was set overhead with a consistent 6.4mm grout joint, each measure checked to maintain rhythm, symmetry, and balance across the vault. Days of preparation went into calculating the curve so that it resolved into full bricks at its base.
+const DETAILS_BODY = `Shot across three continents over eighteen months, this series follows a simple brief: photograph places that feel both improbably large and unmistakably personal. From the Dolomites at first light to a single palm above the South Pacific, from Iceland's basalt waterfalls to a Northwest coast going pink at dusk, the work is paired with quiet residential architecture — modern, restrained, designed to listen rather than speak.
 
-The installation tested the team's physical endurance and technical skill. Working against gravity, perched on ladders, and craning upward, each brick was locked into perfect alignment – no mean feat! Edges were finished with a refined "bird beak" detail, while joints were filled with 5mm raked-back black resin grout, creating sharp shadow lines that created depth and drama. The result? A truly stunning soaring ceiling that fuses mathematics, engineering, strength, and artistry — a true standout achievement for our team and Perth's interior design landscape.`;
+Every image is unedited beyond color and contrast — no compositing, no relocations, no false skies. The intent is reverence, not embellishment. The hope is that you'll look at one of these landscapes the way a guest looks at the home it belongs to: slowly, all the way through, and then again.`;
 
 export default function Home() {
   return (
     <LenisProvider>
-      {/* Fixed overlay nav */}
       <NavBar />
 
       <main style={{ backgroundColor: '#35311f', position: 'relative' }}>
-        {/* 1. Full-viewport hero */}
         <ProjectHero />
 
-        {/* 2. Image gallery with parallax */}
         <ImageGallery />
 
-        {/* 3. Overview text section */}
         <ContentLockup
           id="overview"
           label="Overview"
@@ -36,7 +32,6 @@ export default function Home() {
           anchorHref="#project-details"
         />
 
-        {/* 4. Project details text section */}
         <ContentLockup
           id="project-details"
           label="Project Details"
@@ -45,9 +40,7 @@ export default function Home() {
           bodySize="normal"
         />
 
-        {/* 5. Sticky next-project card + footer stacked in grid so footer scrolls over card */}
         <div style={{ display: 'grid' }}>
-          {/* Twin spacer: reserves space in flow so footer can scroll over the sticky card */}
           <div
             aria-hidden="true"
             style={{
@@ -57,16 +50,14 @@ export default function Home() {
               pointerEvents: 'none',
             }}
           />
-          {/* Sticky card sits at same grid row, behind footer */}
           <div style={{ gridRow: '1', gridColumn: '1 / -1' }}>
             <NextProjectCard
-              title="Eco Outdoor"
-              href="/projects/eco-outdoor/"
+              title="Quiet Forests"
+              href="/projects/quiet-forests/"
               thumbnail="/images/next-project-eco-thumb.jpg"
-              thumbnailAlt="Eco Outdoor project thumbnail"
+              thumbnailAlt="Sun rays piercing through a misty forest at dawn"
             />
           </div>
-          {/* Footer in next row, natural z-index scrolls over the sticky card */}
           <div style={{ gridRow: '2', gridColumn: '1 / -1', position: 'relative', zIndex: 1 }}>
             <Footer />
           </div>

@@ -14,18 +14,18 @@ const neueMontreal = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Duncraig Road | Marvell Tile & Stone",
+  title: "Wild Horizons — A Visual Study of Sublime Landscapes",
   description:
-    "Brick Slip Installation & Natural Stone Floor Tiling. A breathtaking brick-tiled arched ceiling project in Applecross, Western Australia.",
+    "Landscape photography and quiet architecture. Alpine sunsets, tropical coastlines, misty forests, and the homes that live alongside them.",
   openGraph: {
-    title: "Duncraig Road | Marvell Tile & Stone",
-    description: "Brick Slip Installation & Natural Stone Floor Tiling",
+    title: "Wild Horizons — A Visual Study of Sublime Landscapes",
+    description: "Landscape photography and quiet architecture.",
     images: [
       {
         url: "/images/hero-main.jpg",
         width: 1200,
         height: 630,
-        alt: "A luxurious wardrobe featuring a unique brick tiled ceiling.",
+        alt: "A vivid alpine sunset washing color across mountain peaks.",
       },
     ],
   },

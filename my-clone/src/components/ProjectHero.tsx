@@ -170,7 +170,7 @@ export default function ProjectHero() {
         <div className="project-hero__image-wrapper">
           <img
             src="/images/hero-main.jpg"
-            alt="A luxurious wardrobe featuring a unique brick tiled ceiling."
+            alt="A vivid alpine sunset washing color across mountain peaks."
             loading="eager"
           />
         </div>
@@ -179,31 +179,31 @@ export default function ProjectHero() {
             <h1
               className={`project-hero__title${visible ? ' project-hero__title--visible' : ''}`}
             >
-              Duncraig Road
+              Wild Horizons
             </h1>
             <p
               className={`project-hero__subtitle${visible ? ' project-hero__subtitle--visible' : ''}`}
             >
-              Brick Slip Installation &amp; Natural Stone Floor Tiling
+              Landscape Photography &amp; Quiet Architecture
             </p>
           </div>
           <div className="project-hero__footer-content">
             <dl className="project-hero__meta">
               <div>
-                <dt>Builder</dt>
-                <dd>RK Brine Master Builder</dd>
+                <dt>Series</dt>
+                <dd>Wild Horizons, Vol. I</dd>
               </div>
               <div>
-                <dt>Architect</dt>
-                <dd>Peter Moran Architect</dd>
+                <dt>Region</dt>
+                <dd>Dolomites · Pacific · Iceland</dd>
               </div>
               <div>
-                <dt>Designer</dt>
-                <dd>Staple Design</dd>
+                <dt>Year</dt>
+                <dd>2024 — 2026</dd>
               </div>
               <div>
-                <dt>Photographer</dt>
-                <dd>Maguire Imagery</dd>
+                <dt>Imagery</dt>
+                <dd>Adobe Stock</dd>
               </div>
             </dl>
             <a

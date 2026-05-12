@@ -7,23 +7,23 @@ const NAV_ITEMS = [
   {
     label: 'Projects',
     children: [
-      { label: 'Ainslie Street', href: '/projects/ainslie-street/' },
-      { label: 'Beach Street', href: '/projects/beach-street/' },
-      { label: 'Duncraig Road', href: '/projects/duncraig-road/' },
-      { label: 'Eco Outdoor', href: '/projects/eco-outdoor/' },
-      { label: 'Excelsior Street', href: '/projects/excelsior-street/' },
-      { label: 'Forrest Street', href: '/projects/forrest-street/' },
-      { label: 'Hubble Street', href: '/projects/hubble-street/' },
-      { label: 'Sewell Street', href: '/projects/sewell-street/' },
-      { label: 'St. Leonards Ave', href: '/projects/st-leonards-ave/' },
-      { label: 'Vivaldi Avenue', href: '/projects/vivaldi-drive/' },
+      { label: 'Wild Horizons', href: '/projects/wild-horizons/' },
+      { label: 'Quiet Forests', href: '/projects/quiet-forests/' },
+      { label: 'Coastal Light', href: '/projects/coastal-light/' },
+      { label: 'Alpine Studies', href: '/projects/alpine-studies/' },
+      { label: 'Sea & Stone', href: '/projects/sea-and-stone/' },
+      { label: 'Northern Falls', href: '/projects/northern-falls/' },
+      { label: 'Tropic Vol. I', href: '/projects/tropic-vol-1/' },
+      { label: 'Tropic Vol. II', href: '/projects/tropic-vol-2/' },
+      { label: 'Dusk Houses', href: '/projects/dusk-houses/' },
+      { label: 'Slow Mornings', href: '/projects/slow-mornings/' },
     ],
   },
   { label: 'Profile', href: '/profile/' },
   { label: 'Contact', href: '/contact/' },
 ] as const;
 
-const ACTIVE_HREF = '/projects/duncraig-road/';
+const ACTIVE_HREF = '/projects/wild-horizons/';
 
 export default function NavBar() {
   const navRef = useRef<HTMLElement>(null);

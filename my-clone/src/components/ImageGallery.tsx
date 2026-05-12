@@ -100,7 +100,7 @@ export default function ImageGallery() {
               className="block-image__inner"
               ref={(el) => { imgRefs.current[0] = el; }}
             >
-              <img src="/images/gallery-1.jpg" alt="Large glass window and detailed brick tiled ceiling." />
+              <img src="/images/gallery-1.jpg" alt="A modern luxury home framed by lush tropical plants at twilight." />
             </div>
           </div>
           <div className="block-image block-image--right" style={{ width: '33.33%' }}>
@@ -108,7 +108,7 @@ export default function ImageGallery() {
               className="block-image__inner"
               ref={(el) => { imgRefs.current[1] = el; }}
             >
-              <img src="/images/gallery-2.jpg" alt="Luxurious, well-lit, curved, brick, tiled ceiling." />
+              <img src="/images/gallery-2.jpg" alt="A lone palm tree leaning over a tropical paradise beach." />
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function ImageGallery() {
               className="block-image__inner"
               ref={(el) => { imgRefs.current[2] = el; }}
             >
-              <img src="/images/gallery-3.jpg" alt="Precision brick, tiled ceiling framed by wooden cabinets." />
+              <img src="/images/gallery-3.jpg" alt="A misty green mountain forest disappearing into low cloud." />
             </div>
           </div>
           <div className="block-image block-image--right" style={{ width: '33.33%' }}>
@@ -127,7 +127,7 @@ export default function ImageGallery() {
               className="block-image__inner"
               ref={(el) => { imgRefs.current[3] = el; }}
             >
-              <img src="/images/gallery-4.jpg" alt="Luxurious brick tiling." />
+              <img src="/images/gallery-4.jpg" alt="The majestic Skogafoss waterfall cascading down a cliff in Iceland." />
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function ImageGallery() {
               className="block-image__inner"
               ref={(el) => { imgRefs.current[4] = el; }}
             >
-              <img src="/images/gallery-5.jpg" alt="" />
+              <img src="/images/gallery-5.jpg" alt="Panoramic sunset view of the Oregon coastline at golden hour." />
             </div>
           </div>
         </div>
