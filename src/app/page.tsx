@@ -4,187 +4,311 @@ import LenisProvider from '@/components/LenisProvider';
 import { PROJECTS } from '@/lib/projects';
 
 export default function Home() {
+  const featured = PROJECTS.slice(0, 5);
+
   return (
     <LenisProvider>
       <NavBar />
 
-      <main style={{ backgroundColor: '#35311f', minHeight: '100svh' }}>
+      <main style={{ backgroundColor: '#35311f' }}>
         <style>{`
-          .portfolio-hero {
-            padding: 12rem 20px 4rem;
-            text-align: center;
+          /* ── Spread hero ─────────────────────────────────────── */
+          .spread {
+            position: relative;
+            height: 100svh;
+            overflow: hidden;
+            background: #35311f;
           }
-          .portfolio-hero__eyebrow {
-            font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.45);
-            margin: 0 0 1.25rem;
+
+          /* Ghost title behind images */
+          .spread__bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 0;
           }
-          .portfolio-hero__title {
-            font-size: clamp(3rem, 8vw, 7rem);
+          .spread__bg-text {
+            font-size: clamp(4rem, 12vw, 13rem);
             font-weight: 400;
-            color: #fff;
-            letter-spacing: -0.03em;
-            line-height: 0.92;
-            margin: 0 0 1.5rem;
-          }
-          .portfolio-hero__sub {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.07);
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            text-align: center;
+            white-space: nowrap;
             margin: 0;
           }
 
-          .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-            padding: 0 0.75rem 0.75rem;
-          }
-          @media (min-width: 1024px) {
-            .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
-          }
-
-          .portfolio-card {
-            position: relative;
+          /* Individual image cards */
+          .spread__item {
+            position: absolute;
             overflow: hidden;
-            aspect-ratio: 3/4;
             display: block;
             text-decoration: none;
-            background: #1a1810;
           }
-          .portfolio-card img {
+          .spread__item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
           }
-          .portfolio-card:hover img {
-            transform: scale(1.06);
-            filter: brightness(0.55);
-          }
-          .portfolio-card__always {
+          .spread__item:hover img { transform: scale(1.05); }
+
+          /* Pill label — hidden until hover */
+          .spread__label {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.25rem 1.5rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
-            transition: opacity 0.3s ease;
-          }
-          .portfolio-card:hover .portfolio-card__always {
-            opacity: 0;
-          }
-          .portfolio-card__index {
-            font-size: 0.6875rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.45);
-            margin: 0 0 0.25rem;
-          }
-          .portfolio-card__title-small {
-            font-size: 1.125rem;
-            font-weight: 400;
-            color: #fff;
-            margin: 0;
-            letter-spacing: -0.01em;
-          }
-          .portfolio-card__overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 2rem 1.5rem;
-            opacity: 0;
-            transition: opacity 0.35s ease;
-          }
-          .portfolio-card:hover .portfolio-card__overlay {
-            opacity: 1;
-          }
-          .portfolio-card__region {
-            font-size: 0.6875rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
-            margin: 0 0 0.5rem;
-          }
-          .portfolio-card__title {
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: #fff;
-            margin: 0 0 0.75rem;
-            letter-spacing: -0.02em;
-          }
-          .portfolio-card__desc {
-            font-size: 0.8125rem;
-            color: rgba(255,255,255,0.7);
-            margin: 0 0 1.25rem;
-            line-height: 1.55;
-          }
-          .portfolio-card__cta {
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.9);
-            display: flex;
+            bottom: 0.875rem;
+            left: 0.875rem;
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.625rem;
+            padding: 0.5rem 0.875rem;
+            background: rgba(20, 18, 10, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            color: #fff;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            pointer-events: none;
           }
-          .portfolio-card__arrow {
+          .spread__label-arrow {
             display: inline-block;
             transition: transform 0.2s ease;
           }
-          .portfolio-card:hover .portfolio-card__arrow {
-            transform: translateX(5px);
+          .spread__item:hover .spread__label {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          .spread__item:hover .spread__label-arrow {
+            transform: translateX(3px);
           }
 
-          @media (max-width: 639px) {
-            .portfolio-hero { padding-top: 8rem; }
-            .portfolio-card__overlay,
-            .portfolio-card__always { padding: 1rem; }
-            .portfolio-card__title { font-size: 1.125rem; }
+          /* Desktop positions */
+          @media (min-width: 768px) {
+            .spread__item--1 {
+              top: 8%;  left: 2%;
+              width: 20%; height: 56%;
+              z-index: 2;
+            }
+            .spread__item--2 {
+              top: 4%;  left: 24%;
+              width: 30%; height: 48%;
+              z-index: 3;
+            }
+            .spread__item--3 {
+              top: 6%;  right: 2%;
+              width: 24%; height: 52%;
+              z-index: 2;
+            }
+            .spread__item--4 {
+              bottom: 6%; left: 14%;
+              width: 26%; height: 38%;
+              z-index: 3;
+            }
+            .spread__item--5 {
+              bottom: 4%; right: 6%;
+              width: 22%; height: 42%;
+              z-index: 2;
+            }
+          }
+
+          /* Scroll hint */
+          .spread__scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+          }
+          .spread__scroll-label {
+            font-size: 0.6875rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+          }
+          .spread__scroll-line {
+            width: 1px;
+            height: 2.5rem;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+            animation: scrollLine 1.8s ease-in-out infinite;
+          }
+          @keyframes scrollLine {
+            0%   { opacity: 1; transform: scaleY(1) translateY(0); }
+            100% { opacity: 0; transform: scaleY(0.3) translateY(100%); }
+          }
+
+          /* Mobile: replace absolute spread with a 2-col grid */
+          @media (max-width: 767px) {
+            .spread { height: auto; padding: 7rem 0.75rem 3rem; }
+            .spread__bg { position: relative; inset: auto; padding: 1rem 0 2rem; }
+            .spread__bg-text { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .spread__items-mobile {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 0.75rem;
+            }
+            .spread__item {
+              position: static;
+              width: auto !important;
+              height: auto !important;
+              aspect-ratio: 3/4;
+            }
+            .spread__label { opacity: 1; transform: none; }
+            .spread__scroll { display: none; }
+          }
+          @media (min-width: 768px) {
+            .spread__items-mobile { display: contents; }
+          }
+
+          /* ── Projects list (below fold) ──────────────────────── */
+          .projects-list {
+            padding: 6rem 1.5rem 4rem;
+          }
+          .projects-list__heading {
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin: 0 0 3rem;
+          }
+          .projects-list__items {
+            display: grid;
+            gap: 0;
+          }
+          .projects-list__item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            text-decoration: none;
+            transition: padding-left 0.2s ease;
+          }
+          .projects-list__item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+          .projects-list__item:hover { padding-left: 0.75rem; }
+          .projects-list__item-left { display: flex; align-items: center; gap: 1.5rem; }
+          .projects-list__item-num {
+            font-size: 0.6875rem;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.3);
+            min-width: 1.5rem;
+          }
+          .projects-list__item-thumb {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+          }
+          .projects-list__item-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+          }
+          .projects-list__item:hover .projects-list__item-thumb img {
+            transform: scale(1.1);
+          }
+          .projects-list__item-title {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-weight: 400;
+            color: #fff;
+            letter-spacing: -0.01em;
+            margin: 0;
+          }
+          .projects-list__item-region {
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.35);
+            margin: 0;
+            display: none;
+          }
+          @media (min-width: 768px) { .projects-list__item-region { display: block; } }
+          .projects-list__item-arrow {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.3);
+            transition: color 0.2s, transform 0.2s;
+          }
+          .projects-list__item:hover .projects-list__item-arrow {
+            color: #fff;
+            transform: translateX(4px);
           }
         `}</style>
 
-        <div className="portfolio-hero">
-          <p className="portfolio-hero__eyebrow">Selected Works</p>
-          <h1 className="portfolio-hero__title">Portfolio</h1>
-          <p className="portfolio-hero__sub">Landscape photography &amp; quiet architecture</p>
-        </div>
+        {/* ── Spread hero ── */}
+        <section className="spread" aria-label="Featured projects">
+          {/* Ghost title */}
+          <div className="spread__bg" aria-hidden="true">
+            <h1 className="spread__bg-text">Wild<br />Horizons</h1>
+          </div>
 
-        <div className="portfolio-grid">
-          {PROJECTS.map((project, i) => (
-            <a
-              key={project.slug}
-              href={`/projects/${project.slug}/`}
-              className="portfolio-card"
-            >
-              <img
-                src={project.image}
-                alt={project.imageAlt}
-                loading={i < 2 ? 'eager' : 'lazy'}
-              />
-
-              {/* Default label — fades out on hover */}
-              <div className="portfolio-card__always">
-                <p className="portfolio-card__index">{String(i + 1).padStart(2, '0')}</p>
-                <h2 className="portfolio-card__title-small">{project.title}</h2>
-              </div>
-
-              {/* Hover overlay */}
-              <div className="portfolio-card__overlay">
-                <p className="portfolio-card__region">{project.region}</p>
-                <h2 className="portfolio-card__title">{project.title}</h2>
-                <p className="portfolio-card__desc">{project.description}</p>
-                <span className="portfolio-card__cta">
-                  View project <span className="portfolio-card__arrow">→</span>
+          {/* Images */}
+          <div className="spread__items-mobile">
+            {featured.map((project, i) => (
+              <a
+                key={project.slug}
+                href={`/projects/${project.slug}/`}
+                className={`spread__item spread__item--${i + 1}`}
+                aria-label={project.title}
+              >
+                <img
+                  src={project.image}
+                  alt={project.imageAlt}
+                  loading={i < 2 ? 'eager' : 'lazy'}
+                />
+                <span className="spread__label">
+                  {project.title}
+                  <span className="spread__label-arrow">→</span>
                 </span>
-              </div>
-            </a>
-          ))}
-        </div>
+              </a>
+            ))}
+          </div>
+
+          {/* Scroll hint */}
+          <div className="spread__scroll" aria-hidden="true">
+            <span className="spread__scroll-label">Scroll</span>
+            <span className="spread__scroll-line" />
+          </div>
+        </section>
+
+        {/* ── Full project list ── */}
+        <section className="projects-list" aria-label="All projects">
+          <p className="projects-list__heading">All projects</p>
+          <div className="projects-list__items">
+            {PROJECTS.map((project, i) => (
+              <a
+                key={project.slug}
+                href={`/projects/${project.slug}/`}
+                className="projects-list__item"
+              >
+                <div className="projects-list__item-left">
+                  <span className="projects-list__item-num">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div className="projects-list__item-thumb">
+                    <img src={project.image} alt="" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h2 className="projects-list__item-title">{project.title}</h2>
+                    <p className="projects-list__item-region">{project.region}</p>
+                  </div>
+                </div>
+                <span className="projects-list__item-arrow">→</span>
+              </a>
+            ))}
+          </div>
+        </section>
 
         <Footer />
       </main>
