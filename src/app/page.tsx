@@ -17,47 +17,61 @@ export default function Home() {
             position: relative;
             height: 100svh;
             overflow: hidden;
-            background: #35311f;
+            background: transparent;
           }
 
-          /* Ghost title behind images */
+          /* Ghost title behind all images */
           .spread__bg {
             position: absolute;
             inset: 0;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
+            padding-bottom: 4%;
             pointer-events: none;
             z-index: 0;
           }
           .spread__bg-text {
-            font-size: clamp(4rem, 12vw, 13rem);
+            font-size: clamp(5rem, 13vw, 14rem);
             font-weight: 400;
-            color: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.06);
             letter-spacing: -0.04em;
-            line-height: 0.9;
+            line-height: 0.88;
             text-align: center;
             white-space: nowrap;
             margin: 0;
           }
 
-          /* Individual image cards */
+          /* Hitmarker jolt on hover */
+          @keyframes hitjolt {
+            0%   { transform: translate3d(0,0,0) scale(1); }
+            20%  { transform: translate3d(-2px,-2px,0) scale(1.01); }
+            40%  { transform: translate3d(2px, 1px,0) scale(0.99); }
+            60%  { transform: translate3d(-1px, 1px,0) scale(1.005); }
+            80%  { transform: translate3d(1px,-1px,0) scale(1); }
+            100% { transform: translate3d(0,0,0) scale(1); }
+          }
+
+          /* Image cards */
           .spread__item {
             position: absolute;
             overflow: hidden;
             display: block;
             text-decoration: none;
+            z-index: 1;
+          }
+          .spread__item:hover {
+            animation: hitjolt 0.28s cubic-bezier(0.36,0.07,0.19,0.97) both;
+            z-index: 2;
           }
           .spread__item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
           }
-          .spread__item:hover img { transform: scale(1.05); }
 
-          /* Pill label — hidden until hover */
+          /* Pill label */
           .spread__label {
             position: absolute;
             bottom: 0.875rem;
@@ -66,7 +80,7 @@ export default function Home() {
             align-items: center;
             gap: 0.625rem;
             padding: 0.5rem 0.875rem;
-            background: rgba(20, 18, 10, 0.85);
+            background: rgba(20,18,10,0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 100px;
@@ -75,12 +89,12 @@ export default function Home() {
             white-space: nowrap;
             opacity: 0;
             transform: translateY(6px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
             pointer-events: none;
           }
           .spread__label-arrow {
             display: inline-block;
-            transition: transform 0.2s ease;
+            transition: transform 0.15s ease;
           }
           .spread__item:hover .spread__label {
             opacity: 1;
@@ -90,32 +104,37 @@ export default function Home() {
             transform: translateX(3px);
           }
 
-          /* Desktop positions */
+          /*
+           * Desktop layout — 5 images, zero overlap.
+           * Grid conceptually:
+           *  col: [0—21%] [23—49%] [gap] [55—76%] [78—98%]
+           *  Images staggered vertically so they never overlap.
+           */
           @media (min-width: 768px) {
+            /* img1 — left column, upper */
             .spread__item--1 {
-              top: 8%;  left: 2%;
-              width: 20%; height: 56%;
-              z-index: 2;
+              left: 1.5%;  top: 8%;
+              width: 20%;  height: 52%;
             }
+            /* img2 — centre-left, starts near top */
             .spread__item--2 {
-              top: 4%;  left: 24%;
-              width: 30%; height: 48%;
-              z-index: 3;
+              left: 23%;   top: 4%;
+              width: 26%;  height: 46%;
             }
+            /* img3 — centre-right, starts lower so no conflict */
             .spread__item--3 {
-              top: 6%;  right: 2%;
-              width: 24%; height: 52%;
-              z-index: 2;
+              left: 51%;   top: 14%;
+              width: 23%;  height: 50%;
             }
+            /* img4 — centre-left lower (below img2, same column) */
             .spread__item--4 {
-              bottom: 6%; left: 14%;
-              width: 26%; height: 38%;
-              z-index: 3;
+              left: 23%;   top: 52%;   /* top = img2.top + img2.height + gap */
+              width: 26%;  height: 36%;
             }
+            /* img5 — right column */
             .spread__item--5 {
-              bottom: 4%; right: 6%;
-              width: 22%; height: 42%;
-              z-index: 2;
+              left: 76%;   top: 6%;
+              width: 22%;  height: 56%;
             }
           }
 
@@ -130,28 +149,29 @@ export default function Home() {
             align-items: center;
             gap: 0.5rem;
             z-index: 10;
+            pointer-events: none;
           }
           .spread__scroll-label {
             font-size: 0.6875rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.3);
           }
           .spread__scroll-line {
             width: 1px;
             height: 2.5rem;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
-            animation: scrollLine 1.8s ease-in-out infinite;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
+            animation: scrollPulse 1.8s ease-in-out infinite;
           }
-          @keyframes scrollLine {
+          @keyframes scrollPulse {
             0%   { opacity: 1; transform: scaleY(1) translateY(0); }
             100% { opacity: 0; transform: scaleY(0.3) translateY(100%); }
           }
 
-          /* Mobile: replace absolute spread with a 2-col grid */
+          /* Mobile: 2-col grid, always-visible labels */
           @media (max-width: 767px) {
-            .spread { height: auto; padding: 7rem 0.75rem 3rem; }
-            .spread__bg { position: relative; inset: auto; padding: 1rem 0 2rem; }
+            .spread { height: auto; padding: 7rem 0.75rem 3rem; overflow: visible; }
+            .spread__bg { position: relative; padding: 1rem 0 2rem; }
             .spread__bg-text { font-size: clamp(2.5rem, 10vw, 4rem); }
             .spread__items-mobile {
               display: grid;
@@ -171,7 +191,7 @@ export default function Home() {
             .spread__items-mobile { display: contents; }
           }
 
-          /* ── Projects list (below fold) ──────────────────────── */
+          /* ── Project list (below fold) ───────────────────────── */
           .projects-list {
             padding: 6rem 1.5rem 4rem;
           }
@@ -181,10 +201,6 @@ export default function Home() {
             text-transform: uppercase;
             color: rgba(255,255,255,0.35);
             margin: 0 0 3rem;
-          }
-          .projects-list__items {
-            display: grid;
-            gap: 0;
           }
           .projects-list__item {
             display: flex;
@@ -197,25 +213,19 @@ export default function Home() {
           }
           .projects-list__item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
           .projects-list__item:hover { padding-left: 0.75rem; }
-          .projects-list__item-left { display: flex; align-items: center; gap: 1.5rem; }
+          .projects-list__item-left {
+            display: flex; align-items: center; gap: 1.5rem;
+          }
           .projects-list__item-num {
-            font-size: 0.6875rem;
-            letter-spacing: 0.1em;
-            color: rgba(255,255,255,0.3);
-            min-width: 1.5rem;
+            font-size: 0.6875rem; letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.3); min-width: 1.5rem;
           }
           .projects-list__item-thumb {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 4px;
-            overflow: hidden;
-            flex-shrink: 0;
+            width: 3rem; height: 3rem;
+            border-radius: 4px; overflow: hidden; flex-shrink: 0;
           }
           .projects-list__item-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            width: 100%; height: 100%; object-fit: cover; display: block;
             transition: transform 0.3s ease;
           }
           .projects-list__item:hover .projects-list__item-thumb img {
@@ -223,37 +233,29 @@ export default function Home() {
           }
           .projects-list__item-title {
             font-size: clamp(1rem, 2.5vw, 1.5rem);
-            font-weight: 400;
-            color: #fff;
-            letter-spacing: -0.01em;
-            margin: 0;
+            font-weight: 400; color: #fff;
+            letter-spacing: -0.01em; margin: 0;
           }
           .projects-list__item-region {
-            font-size: 0.8125rem;
-            color: rgba(255,255,255,0.35);
-            margin: 0;
-            display: none;
+            font-size: 0.8125rem; color: rgba(255,255,255,0.35);
+            margin: 0; display: none;
           }
           @media (min-width: 768px) { .projects-list__item-region { display: block; } }
           .projects-list__item-arrow {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.3);
+            font-size: 1rem; color: rgba(255,255,255,0.3);
             transition: color 0.2s, transform 0.2s;
           }
           .projects-list__item:hover .projects-list__item-arrow {
-            color: #fff;
-            transform: translateX(4px);
+            color: #fff; transform: translateX(4px);
           }
         `}</style>
 
         {/* ── Spread hero ── */}
         <section className="spread" aria-label="Featured projects">
-          {/* Ghost title */}
           <div className="spread__bg" aria-hidden="true">
-            <h1 className="spread__bg-text">Wild<br />Horizons</h1>
+            <h1 className="spread__bg-text">Wild Horizons</h1>
           </div>
 
-          {/* Images */}
           <div className="spread__items-mobile">
             {featured.map((project, i) => (
               <a
@@ -275,7 +277,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Scroll hint */}
           <div className="spread__scroll" aria-hidden="true">
             <span className="spread__scroll-label">Scroll</span>
             <span className="spread__scroll-line" />
@@ -285,7 +286,7 @@ export default function Home() {
         {/* ── Full project list ── */}
         <section className="projects-list" aria-label="All projects">
           <p className="projects-list__heading">All projects</p>
-          <div className="projects-list__items">
+          <div>
             {PROJECTS.map((project, i) => (
               <a
                 key={project.slug}
