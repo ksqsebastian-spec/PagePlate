@@ -137,7 +137,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <div id="project-details">
             <ContentLockup
               label="Project Details"
-              body={project.details}
+              secondaryContent={project.details}
             />
           </div>
         </div>

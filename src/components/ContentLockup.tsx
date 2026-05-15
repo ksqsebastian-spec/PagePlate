@@ -1,7 +1,7 @@
 interface ContentLockupProps {
   id?: string;
   label: string;
-  body: string;
+  body?: string;
   secondaryContent?: string;
   anchorLabel?: string;
   anchorHref?: string;
@@ -89,13 +89,6 @@ export default function ContentLockup({
           flex-direction: column;
           gap: 2rem;
         }
-        @media (min-width: 992px) {
-          .content-lockup__secondary {
-            grid-column: 2;
-            grid-row: 2;
-            flex-direction: column;
-          }
-        }
 
         .content-lockup__secondary-content {
           font-weight: 400;
@@ -146,30 +139,26 @@ export default function ContentLockup({
         <h2 className="content-lockup__title">{label}</h2>
 
         <div className="content-lockup__content">
-          <p className="content-lockup__body">{body}</p>
-        </div>
-
-        {(secondaryParagraphs.length > 0 || anchorLabel) && (
-          <div className="content-lockup__secondary">
-            <div className="content-lockup__secondary-content">
-              {secondaryParagraphs.map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-              {anchorLabel && (
-                <p>
-                  <span hidden>–––</span>{' '}
-                  {anchorHref ? (
-                    <a href={anchorHref} className="content-lockup__anchor-button">
-                      {anchorLabel}
-                    </a>
-                  ) : (
-                    <button className="content-lockup__anchor-button">{anchorLabel}</button>
-                  )}
-                </p>
-              )}
+          {body && <p className="content-lockup__body">{body}</p>}
+          {anchorLabel && (
+            anchorHref ? (
+              <a href={anchorHref} className="content-lockup__anchor-button">
+                {anchorLabel}
+              </a>
+            ) : (
+              <button className="content-lockup__anchor-button">{anchorLabel}</button>
+            )
+          )}
+          {secondaryParagraphs.length > 0 && (
+            <div className="content-lockup__secondary">
+              <div className="content-lockup__secondary-content">
+                {secondaryParagraphs.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );
