@@ -54,15 +54,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           }
           .ph__title {
             font-weight: 400; letter-spacing: -0.01em;
-            font-size: clamp(2.5rem, 6vw, 8rem);
+            font-size: 3.5rem;
             color: #fff; line-height: 0.95; margin: 0;
             animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both;
           }
+          @media (min-width: 480px) { .ph__title { font-size: 4.5rem; } }
+          @media (min-width: 992px) { .ph__title { font-size: 8rem; } }
           .ph__subtitle {
-            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            font-size: 1.25rem;
             color: rgba(255,255,255,0.6); margin: 0;
             animation: fadeIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s both;
           }
+          @media (min-width: 992px) { .ph__subtitle { font-size: 1.75rem; } }
           @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
           @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -75,21 +78,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           }
           .ph__meta-item { display: grid; gap: 0.375rem; }
           @media (min-width: 768px) { .ph__meta-item { justify-items: center; } }
-          .ph__meta dt { font-size: 0.75rem; color: rgba(255,255,255,0.6); letter-spacing: 0.05em; text-transform: uppercase; margin: 0; }
-          .ph__meta dd { font-size: 0.875rem; color: #fff; letter-spacing: -0.01em; margin: 0; }
-
-          .back-link {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            font-size: 0.8125rem; letter-spacing: 0.05em; text-transform: uppercase;
-            color: rgba(255,255,255,0.5); text-decoration: none;
-            padding: 3rem var(--container-gutter, 20px) 0;
-            transition: color 0.2s;
+          .ph__meta dt { font-size: 1rem; color: rgba(255,255,255,0.6); letter-spacing: -0.01em; margin: 0; }
+          .ph__meta dd { font-size: 1rem; color: #fff; letter-spacing: -0.01em; margin: 0; }
+          @media (min-width: 992px) {
+            .ph__meta dt, .ph__meta dd { font-size: 1.25rem; letter-spacing: -0.0125em; }
           }
-          .back-link:hover { color: #fff; }
 
-          .project-content {
-            background-color: #f3efeb;
-            --color--bg: #f3efeb;
+          .project-fg {
+            background-color: rgb(202, 202, 196);
+            --color--bg: rgb(202, 202, 196);
             --color--bg-strong: #ffffff;
             --color--text: rgba(0,0,0,0.6);
             --color--text-strong: #35311f;
@@ -98,13 +95,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             --color--border-subtle: rgba(0,0,0,0.1);
           }
 
-          .np-grid { display: grid; }
+          .np-grid { display: grid; isolation: isolate; }
           .np-grid__spacer { grid-area: 1/-1; height: 100lvh; pointer-events: none; }
           .np-grid__card { grid-area: 1/-1; }
           .np-grid__footer { grid-row: 2; }
         `}</style>
-
-        <a href="/" className="back-link">← All projects</a>
 
         <section className="ph">
           <div className="ph__img">
@@ -126,17 +121,25 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
 
-        {project.galleryImages.length > 0 && (
-          <ImageGallery images={project.galleryImages} />
-        )}
-
-        <div className="project-content">
+        <div className="project-fg">
           <ContentLockup
             id="overview"
             label="Overview"
             body={project.overview}
-            secondaryContent={project.details}
+            anchorLabel="→ Project Details"
+            anchorHref="#project-details"
           />
+
+          {project.galleryImages.length > 0 && (
+            <ImageGallery images={project.galleryImages} />
+          )}
+
+          <div id="project-details">
+            <ContentLockup
+              label="Project Details"
+              body={project.details}
+            />
+          </div>
         </div>
 
         <div className="np-grid">
@@ -147,11 +150,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               href={next ? `/projects/${next.slug}/` : '/'}
               thumbnail={project.nextThumb}
               thumbnailAlt={project.nextThumbAlt}
-              theme="dark"
+              theme="light"
             />
           </div>
           <div className="np-grid__footer">
-            <Footer variant="dark" />
+            <Footer variant="light" />
           </div>
         </div>
       </main>

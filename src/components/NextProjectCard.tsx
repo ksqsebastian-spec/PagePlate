@@ -23,9 +23,9 @@ export default function NextProjectCard({
   const themeVars =
     theme === 'light'
       ? {
-          '--color--bg': '#f3efeb',
+          '--color--bg': 'rgb(226, 221, 219)',
           '--color--bg-strong': '#ffffff',
-          '--color--text-strong': '#35311f',
+          '--color--text-strong': '#000000',
           '--color--text': 'rgba(0,0,0,0.6)',
           '--color--text-subtle': 'rgba(0,0,0,0.4)',
         }

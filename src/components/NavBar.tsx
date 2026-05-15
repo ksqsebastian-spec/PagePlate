@@ -7,28 +7,31 @@ const NAV_ITEMS = [
   {
     label: 'Projects',
     children: [
-      { label: 'Wild Horizons', href: '/projects/wild-horizons/' },
-      { label: 'Quiet Forests', href: '/projects/quiet-forests/' },
-      { label: 'Coastal Light', href: '/projects/coastal-light/' },
-      { label: 'Alpine Studies', href: '/projects/alpine-studies/' },
-      { label: 'Sea & Stone', href: '/projects/sea-and-stone/' },
-      { label: 'Northern Falls', href: '/projects/northern-falls/' },
-      { label: 'Tropic Vol. I', href: '/projects/tropic-vol-1/' },
-      { label: 'Tropic Vol. II', href: '/projects/tropic-vol-2/' },
-      { label: 'Dusk Houses', href: '/projects/dusk-houses/' },
-      { label: 'Slow Mornings', href: '/projects/slow-mornings/' },
+      { label: 'Ainslie Street', href: '/projects/ainslie-street/' },
+      { label: 'Beach Street', href: '/projects/beach-street/' },
+      { label: 'Duncraig Road', href: '/projects/duncraig-road/' },
+      { label: 'Eco Outdoor', href: '/projects/eco-outdoor/' },
+      { label: 'Excelsior Street', href: '/projects/excelsior-street/' },
+      { label: 'Forrest Street', href: '/projects/forrest-street/' },
+      { label: 'Hubble Street', href: '/projects/hubble-street/' },
+      { label: 'Sewell Street', href: '/projects/sewell-street/' },
+      { label: 'St. Leonards Ave', href: '/projects/st-leonards-ave/' },
+      { label: 'Vivaldi Avenue', href: '/projects/vivaldi-avenue/' },
     ],
   },
   { label: 'Profile', href: '/profile/' },
   { label: 'Contact', href: '/contact/' },
 ] as const;
 
-const ACTIVE_HREF = '/projects/wild-horizons/';
-
 export default function NavBar() {
   const navRef = useRef<HTMLElement>(null);
   const submenuLiRef = useRef<HTMLLIElement>(null);
   const [open, setOpen] = useState(false);
+  const [currentPath, setCurrentPath] = useState('');
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname);
+  }, []);
 
   // Scroll-driven hide/show
   useEffect(() => {
@@ -224,7 +227,7 @@ export default function NavBar() {
                 <li key={child.href}>
                   <a
                     href={child.href}
-                    className={`nav-submenu-link${child.href === ACTIVE_HREF ? ' nav-submenu-link--active' : ''}`}
+                    className={`nav-submenu-link${child.href === currentPath ? ' nav-submenu-link--active' : ''}`}
                   >
                     {child.label}
                   </a>

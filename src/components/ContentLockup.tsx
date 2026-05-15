@@ -143,7 +143,7 @@ export default function ContentLockup({
         }
       `}</style>
       <div id={id} className={`content-lockup${className ? ` ${className}` : ''}`}>
-        <p className="content-lockup__title">{label}</p>
+        <h2 className="content-lockup__title">{label}</h2>
 
         <div className="content-lockup__content">
           <p className="content-lockup__body">{body}</p>
