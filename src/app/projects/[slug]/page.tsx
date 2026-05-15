@@ -126,7 +126,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             id="overview"
             label="Overview"
             body={project.overview}
-            anchorLabel="→ Project Details"
+            anchorLabel="↓ Project Details"
             anchorHref="#project-details"
           />
 
