@@ -10,6 +10,7 @@ export interface Project {
   galleryImages: { src: string; alt: string; left?: boolean }[];
   overview: string;
   details: string;
+  metadata?: Array<{ label: string; value: string }>;
   nextSlug?: string;
   nextTitle?: string;
   nextThumb: string;
@@ -17,6 +18,67 @@ export interface Project {
 }
 
 export const PROJECTS: Project[] = [
+  {
+    slug: 'hubble-street',
+    title: 'Hubble Street',
+    subtitle: 'Master Ensuite, Main Bathroom, Large Family Powder Room',
+    description: 'A defining collaboration with builder Arklen on a heritage cottage rear extension in East Fremantle.',
+    year: '2023',
+    region: 'East Fremantle, WA',
+    image: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/32250_2-1_Hskawwzb1.jpg?tr=w-1170,h-768,q-80',
+    imageAlt: 'A modern kitchen featuring a well-lit splash-back of cream vertical stack tiles.',
+    galleryImages: [
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_0215_6G85vEGOI.jpg?tr=w-1680,h-1228,q-80', alt: 'Modern kitchen with under cabinet lighting illuminating a vertical stack tiled splash-back.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_0259_FjBaNLFXm.jpg?tr=w-1680,h-1228,q-80', alt: 'A white bathroom with wooden cabinet, featuring a white tiled surrounding wall.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_0295_rq02VAeDo.jpg?tr=w-840,h-1228,q-80', alt: 'A modern shower with white tiling.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_0280_fWMiWRIIF.jpg?tr=w-840,h-1228,q-80', alt: 'Modern white bathroom with wooden cabinets with white tiling on the walls.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_0355-1_QJlsZGdiw.jpg?tr=w-1680,h-1228,q-80', alt: 'Sleek bathroom counter with an exposed brick feature wall and tall vertical green tiling to accent it.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_0337-1__jNx8eoxz.jpg?tr=w-840,h-1228,q-80', alt: 'Off white and green vertical stacked tiling on a bathroom wall.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_0373_T15UDw_pk.jpg?tr=w-1680,h-1228,q-80', alt: 'Modern bathroom with a white counter and sink with an arched mirror above, surrounded by green and off-white vertical stacked tiling.' },
+    ],
+    overview: '––– This Hubble Street home in East Fremantle marked a defining moment for Marvell Tile and Stone in Western Australia. Their first collaboration with builder Arklen, this rear extension to a heritage cottage seamlessly blends old and new, showcasing beautiful detailing, refined materiality, and the fine craftsmanship that has since become Marvell\'s signature.',
+    details: '––– Discovered by Arklen through social media soon after relocating from London, William Marvell and his team were engaged to complete this Hubble Street home\'s three wet areas — a master ensuite, kids\' bathroom, and family powder room. This project became a foundation for their Western Australian practice and the start of an enduring partnership built on skill and shared standards.\n\nA refined palette of dual-format matte white wall tiles and terrazzo floors anchors each space with texture and balance. In the master ensuite, two colourways of subway tiles were laid in a vertical stack bond, establishing rhythm and order. Every surface reflects craftsmanship — mixed tile formats align perfectly at corners, grout lines run seamlessly through adjoining rooms, and symmetry is carefully maintained throughout. The result is a collection of calm, timeless spaces that reflect both Arklen\'s and Marvell\'s skill, vision and execution, setting the tone for their future work across Perth\'s design landscape.',
+    metadata: [
+      { label: 'Builder', value: 'Arklen' },
+      { label: 'Architect / Designer', value: 'Lahaus' },
+      { label: 'Tile / Terrazzo Supplier', value: 'Artedomus' },
+      { label: 'Photographer', value: 'Peter Ellery Photography' },
+    ],
+    nextSlug: 'sewell-street',
+    nextTitle: 'Sewell Street',
+    nextThumb: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_3568-cropped_YHAqn7tTJ.jpg?tr=w-140,h-140,q-80',
+    nextThumbAlt: 'A frontal view of the detailed stonework on the stairs.',
+  },
+  {
+    slug: 'sewell-street',
+    title: 'Sewell Street',
+    subtitle: 'Outdoor Paving & Pool Surrounds',
+    description: 'Detailed stonework and paving for a contemporary Perth home.',
+    year: '2023',
+    region: 'Subiaco, WA',
+    image: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_3568-cropped_YHAqn7tTJ.jpg?tr=w-1170,h-768,q-80',
+    imageAlt: 'A frontal view of the detailed stonework on the stairs.',
+    galleryImages: [
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_3568-cropped_YHAqn7tTJ.jpg?tr=w-1680,h-1228,q-80', alt: 'A frontal view of the detailed stonework on the stairs.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_3571-cropped_YjFBcWVjo.jpg?tr=w-840,h-1228,q-80', alt: 'Birds-eye view of stone tiled stairway leading from the driveway.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_3556-cropped_bdzE6D29J.jpg?tr=w-840,h-1228,q-80', alt: 'A striking white house facade with detailed stonework on the stairs.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_8846_qQYBah9oW.jpeg?tr=w-840,h-1228,q-80', alt: 'Birdseye view of private pool with a stone tiled border.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_8864_J5POGg-uW.jpeg?tr=w-1680,h-1228,q-80', alt: 'Small private pool featuring stone tiling and surrounding garden.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_8962-cropped_-RpWZ2TD3.jpg?tr=w-840,h-1228,q-80', alt: 'Pool featuring stone tiling and greenery.' },
+      { src: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/DSC_3571-cropped_YjFBcWVjo.jpg?tr=w-1680,h-1228,q-80', alt: 'Detailed stone pathway leading to front entrance.' },
+    ],
+    overview: '––– The Sewell Street project showcases Marvell\'s expertise in outdoor stone installation. A complete transformation of the home\'s exterior spaces, featuring hand-selected natural stone paving across multiple terraces and pool surrounds.',
+    details: '––– Working in close collaboration with the landscape architect, Marvell sourced and installed a cohesive selection of natural stone across the driveway, stairs, pathways, and pool border. The result is a seamless transition from street to pool — a quiet, confident landscape that lets the material speak.\n\nEvery slab was set by hand, with particular attention to joint width consistency and directional coursing. The pool border required specialist waterproofing detailing beneath, while the stair nosings were custom-cut to radius to match the curved retaining wall above.',
+    metadata: [
+      { label: 'Builder', value: 'Talo Constructions' },
+      { label: 'Stone Supplier', value: 'Artedomus' },
+      { label: 'Photographer', value: 'Peter Ellery Photography' },
+    ],
+    nextSlug: 'hubble-street',
+    nextTitle: 'Hubble Street',
+    nextThumb: 'https://ik.imagekit.io/isclzlt7q/marvell-production/images/32250_2-1_Hskawwzb1.jpg?tr=w-140,h-140,q-80',
+    nextThumbAlt: 'A modern kitchen with cream vertical stack tile backsplash.',
+  },
   {
     slug: 'wild-horizons',
     title: 'Wild Horizons',

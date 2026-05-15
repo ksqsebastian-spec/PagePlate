@@ -2,12 +2,12 @@
 
 *, *::before, *::after { cursor: none !important; }
 
-/* Subtle white grid overlay on the page background */
+html {
+  background-color: #e9e4df;
+}
+
 body {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-color: #e9e4df;
 }
 
 /* ─── Marvell Design Tokens ─────────────────────────────────────────── */

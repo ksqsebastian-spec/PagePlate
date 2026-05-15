@@ -1,180 +1,176 @@
-'use client';
-
-import { useRef, useState, useEffect } from 'react';
-
 interface ContentLockupProps {
   id?: string;
   label: string;
   body: string;
-  bodySize?: 'large' | 'normal';
+  secondaryContent?: string;
   anchorLabel?: string;
   anchorHref?: string;
-  decoration?: string;
+  className?: string;
 }
 
 export default function ContentLockup({
   id,
   label,
   body,
-  bodySize = 'large',
+  secondaryContent,
   anchorLabel,
   anchorHref,
-  decoration,
+  className,
 }: ContentLockupProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { rootMargin: '-5% 0px' }
-    );
-    if (sectionRef.current) obs.observe(sectionRef.current);
-    return () => obs.disconnect();
-  }, []);
-
-  const revealBase: React.CSSProperties = {
-    opacity: 0,
-    transform: 'translateY(24px)',
-  };
-
-  const revealVisible: React.CSSProperties = {
-    opacity: 1,
-    transform: 'translateY(0)',
-    transition:
-      'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)',
-  };
-
-  const labelStyle: React.CSSProperties = {
-    ...(visible ? revealVisible : revealBase),
-  };
-
-  const bodyStyle: React.CSSProperties = {
-    ...(visible
-      ? {
-          ...revealVisible,
-          transitionDelay: '200ms',
-        }
-      : { ...revealBase }),
-  };
+  const secondaryParagraphs = secondaryContent
+    ? secondaryContent.split('\n\n').filter(Boolean)
+    : [];
 
   return (
-    <section ref={sectionRef} id={id} className="content-lockup">
+    <>
       <style>{`
         .content-lockup {
-          padding-block: 10rem;
+          padding-block: var(--padding-section--xl, 10rem);
+          padding-inline: var(--container-aside, var(--container-gutter, 20px));
           display: grid;
-          gap: 1.25rem 3rem;
-          align-content: start;
-          color: rgba(255, 255, 255, 0.7);
-          background-color: #35311f;
+          color: var(--color--text, rgba(0,0,0,0.6));
+          gap: var(--gap-container--md, 1.25rem) var(--gap-section--md, 3rem);
+          align-content: center;
         }
-
-        @media (min-width: 768px) {
+        @media (min-width: 992px) {
           .content-lockup {
-            padding-block: 16rem;
-            grid-template-columns: 19.25rem 1fr;
+            --small-col-width: 19.25rem;
+            grid-template-columns: var(--small-col-width) 1fr;
+            align-items: flex-start;
+          }
+        }
+        @media (min-width: 1400px) {
+          .content-lockup {
+            --small-col-width: 27.375rem;
           }
         }
 
-        @media (min-width: 1280px) {
-          .content-lockup {
-            grid-template-columns: 27.375rem 1fr;
-          }
-        }
-
-        .content-lockup__label {
+        .content-lockup__title {
           letter-spacing: -0.01em;
           font-size: 1rem;
           font-weight: 400;
-          color: rgba(255, 255, 255, 0.6);
+          color: var(--color--text-subtle, rgba(0,0,0,0.4));
           line-height: 1.2;
           margin: 0;
         }
-
-        @media (min-width: 768px) {
-          .content-lockup__label {
-            font-size: 1.5rem;
+        @media (min-width: 992px) {
+          .content-lockup__title {
+            font-size: 1.25rem;
           }
         }
 
-        .content-lockup__decoration {
-          color: #9b926a;
-          font-size: 0.875rem;
-          letter-spacing: 0.1em;
-          margin-bottom: 0.5rem;
+        .content-lockup__content {
+          display: flex;
+          flex-direction: column;
+          gap: var(--gap-section--lg, 5rem);
         }
 
-        .content-lockup__body--large {
-          font-size: 1.5rem;
-          line-height: 1.4;
+        .content-lockup__body {
           font-weight: 400;
           letter-spacing: -0.01em;
-          color: rgba(255, 255, 255, 0.7);
+          font-size: 2.25rem;
+          line-height: 1.3;
           margin: 0;
-          white-space: pre-line;
+          color: var(--color--text, rgba(0,0,0,0.6));
+        }
+        @media (min-width: 992px) {
+          .content-lockup__body {
+            font-size: 3rem;
+          }
+        }
+        @media (min-width: 1920px) {
+          .content-lockup__body {
+            font-size: 3.5rem;
+          }
         }
 
-        @media (min-width: 1280px) {
-          .content-lockup__body--large {
+        .content-lockup__secondary {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+        @media (min-width: 992px) {
+          .content-lockup__secondary {
+            grid-column: 2;
+            grid-row: 2;
+            flex-direction: column;
+          }
+        }
+
+        .content-lockup__secondary-content {
+          font-weight: 400;
+          line-height: 1.3;
+          letter-spacing: -0.01em;
+          font-size: 1.5rem;
+          color: var(--color--text, rgba(0,0,0,0.6));
+          margin-top: -0.25em;
+          white-space: pre-wrap;
+        }
+        @media (min-width: 992px) {
+          .content-lockup__secondary-content {
+            font-size: 1.75rem;
+          }
+        }
+        @media (min-width: 1920px) {
+          .content-lockup__secondary-content {
             font-size: 2rem;
           }
         }
-
-        .content-lockup__body--normal {
-          font-size: 1.125rem;
-          line-height: 1.6;
-          font-weight: 400;
-          letter-spacing: -0.01em;
-          color: rgba(255, 255, 255, 0.7);
+        .content-lockup__secondary-content p {
           margin: 0;
-          white-space: pre-line;
         }
 
-        .content-lockup__anchor {
+        .content-lockup__anchor-button {
+          font-weight: 400;
+          line-height: 1.2;
+          letter-spacing: -0.01em;
+          font-size: 1rem;
           display: inline-flex;
           align-items: center;
-          gap: 0.375rem;
-          font-size: 0.875rem;
-          color: rgba(255, 255, 255, 0.6);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-          padding-bottom: 0.25rem;
+          gap: 0;
+          color: var(--color--text, rgba(0,0,0,0.6));
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          margin: 0;
           text-decoration: none;
-          margin-top: 1.5rem;
-          transition: color 0.2s, border-color 0.2s;
         }
-
-        .content-lockup__anchor:hover {
-          color: #fff;
-          border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .content-lockup__right {
-          display: flex;
-          flex-direction: column;
+        @media (min-width: 992px) {
+          .content-lockup__anchor-button {
+            font-size: 1.25rem;
+          }
         }
       `}</style>
+      <div id={id} className={`content-lockup${className ? ` ${className}` : ''}`}>
+        <p className="content-lockup__title">{label}</p>
 
-      <h2 className="content-lockup__label" style={labelStyle}>
-        {label}
-      </h2>
+        <div className="content-lockup__content">
+          <p className="content-lockup__body">{body}</p>
+        </div>
 
-      <div className="content-lockup__right" style={bodyStyle}>
-        {decoration && (
-          <em className="content-lockup__decoration">{decoration}</em>
-        )}
-        <p className={`content-lockup__body--${bodySize}`}>{body}</p>
-        {anchorLabel && anchorHref && (
-          <a href={anchorHref} className="content-lockup__anchor">
-            {anchorLabel}
-          </a>
+        {(secondaryParagraphs.length > 0 || anchorLabel) && (
+          <div className="content-lockup__secondary">
+            <div className="content-lockup__secondary-content">
+              {secondaryParagraphs.map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+              {anchorLabel && (
+                <p>
+                  <span hidden>–––</span>{' '}
+                  {anchorHref ? (
+                    <a href={anchorHref} className="content-lockup__anchor-button">
+                      {anchorLabel}
+                    </a>
+                  ) : (
+                    <button className="content-lockup__anchor-button">{anchorLabel}</button>
+                  )}
+                </p>
+              )}
+            </div>
+          </div>
         )}
       </div>
-    </section>
+    </>
   );
 }

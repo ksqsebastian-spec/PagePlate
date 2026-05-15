@@ -1,12 +1,15 @@
-import { MarvellLogo, InstagramIcon, FacebookIcon } from './icons';
+import { InstagramIcon, FacebookIcon } from './icons';
 
-export default function Footer() {
+interface FooterProps {
+  variant?: 'light' | 'dark';
+}
+
+export default function Footer({ variant = 'light' }: FooterProps) {
   return (
-    <footer className="site-footer">
+    <footer className={`footer footer--${variant}`}>
       <style>{`
-        .site-footer {
-          padding: 1.5rem;
-          color: rgba(255, 255, 255, 0.6);
+        .footer {
+          padding: var(--padding-section--sm, 1.5rem);
           display: grid;
           grid-template-areas: "logo logo" "content socials";
           gap: 1.5rem 0.75rem;
@@ -14,80 +17,119 @@ export default function Footer() {
           line-height: 1.2;
           letter-spacing: -0.01em;
           font-size: 0.75rem;
-          background-color: #35311f;
         }
-
-        @media (min-width: 480px) {
-          .site-footer {
+        @media (min-width: 992px) {
+          .footer {
             font-size: 0.875rem;
+          }
+        }
+        @media (min-width: 1400px) {
+          .footer {
             grid-template-areas: "logo content socials";
             grid-template-columns: auto 1fr auto;
           }
         }
 
-        .site-footer__logo {
+        .footer--light {
+          --color--bg: #f3efeb;
+          --color--text-strong: #35311f;
+          --color--text: rgba(0,0,0,0.6);
+          --color--text-subtle: rgba(0,0,0,0.4);
+          background-color: var(--color--bg, #f3efeb);
+          color: var(--color--text-subtle, rgba(0,0,0,0.4));
+        }
+
+        .footer--dark {
+          --color--bg: #35311f;
+          --color--text-strong: #ffffff;
+          --color--text: rgba(255,255,255,0.7);
+          --color--text-subtle: rgba(255,255,255,0.6);
+          background-color: var(--color--bg, #35311f);
+          color: var(--color--text-subtle, rgba(255,255,255,0.6));
+        }
+
+        .footer__logo {
           grid-area: logo;
-          color: #b1a781;
-          display: flex;
-          align-items: center;
-          width: fit-content;
-          text-decoration: none;
-          transition: color 0.2s ease;
+          color: var(--color--text-strong);
+          width: 8.875rem;
+          display: block;
+        }
+        .footer__logo svg {
+          width: 100%;
+          height: auto;
         }
 
-        .site-footer__logo:hover {
-          color: #fff;
-        }
-
-        .site-footer__content {
+        .footer__content {
           grid-area: content;
           display: flex;
+          gap: 0.375rem 1.25rem;
           flex-direction: column;
-          gap: 0.375rem;
         }
-
-        .site-footer__links {
-          display: flex;
-          gap: 0.75rem;
-          list-style: none;
-          padding: 0;
+        @media (min-width: 768px) {
+          .footer__content {
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+        @media (min-width: 1400px) {
+          .footer__content {
+            justify-content: center;
+          }
+        }
+        .footer__content p {
           margin: 0;
         }
 
-        .site-footer a {
-          color: rgba(255, 255, 255, 0.6);
+        .footer__links {
+          list-style: none;
+          display: flex;
+          gap: 0.5ch;
+          padding: 0;
+          margin: 0;
+        }
+        .footer__links a {
+          color: var(--color--text-subtle);
           text-decoration: none;
-          transition: color 0.2s ease;
+        }
+        .footer__links a:hover {
+          color: var(--color--text-strong);
         }
 
-        .site-footer a:hover {
-          color: #fff;
-        }
-
-        .site-footer__socials {
+        .footer__socials {
           grid-area: socials;
           display: flex;
-          gap: 0.75rem;
           align-items: center;
-          justify-content: flex-end;
+          align-self: flex-end;
+          justify-self: flex-end;
           list-style: none;
+          gap: 1.125rem;
           padding: 0;
           margin: 0;
         }
-
-        .site-footer__social-icon {
-          width: 1.125rem;
-          height: 1.125rem;
+        @media (min-width: 1400px) {
+          .footer__socials {
+            align-self: center;
+          }
+        }
+        .footer__socials a {
+          text-decoration: none;
+          color: var(--color--text-subtle);
+        }
+        .footer__socials a:hover {
+          color: var(--color--text-strong);
         }
       `}</style>
 
-      <a href="/" className="site-footer__logo" aria-label="Marvell Tile & Stone">
-        <MarvellLogo />
+      <a href="/" className="footer__logo" aria-label="Marvell Tile &amp; Stone">
+        <svg fill="none" height="39" viewBox="0 0 170 39" width="170" xmlns="http://www.w3.org/2000/svg">
+          <path d="M35.916 0h-1.197v38.643h1.197zM38.315 0h-1.198v38.643h1.198zM40.705 0h-1.197v38.643h1.197zM43.104 0h-1.198v38.643h1.197zM21.55 19.322l.6 1.072L32.327 2.148v2.147l-9.579 17.174zL10.775 0H9.578v38.643h1.197V19.322l10.758 19.29.599-1.072-11.359-20.364V15.03l11.957 21.44.599-1.07L10.77 12.883v-2.147l13.157 23.59.598-1.07-13.75-24.668V6.441L25.13 32.18l.599-1.071L10.775 4.293V2.146L26.33 30.037l.599-1.07.008.016 5.387-9.661v19.321h1.198V0h-1.197L21.549 19.322zm10.777-6.44-7.184 12.88.598 1.073 6.586-11.808v2.147L26.34 27.908l-1.197-2.148-.599-1.073 7.783-13.953zm0-4.294-8.381 15.029.299.537-.898-1.61 8.98-16.101V8.59zM1.197 0H0v38.643h1.197zM3.596 0H2.398v38.643h1.198zM5.986 0H4.79v38.643h1.197zM8.385 0H7.188v38.643h1.197z" fill="#9B926A"/>
+          <path d="M169.896 32.318q0 .69-.024.88h-9.322q.048 1.64.975 2.782.951 1.118 2.664 1.118 1.427 0 2.187-.666.762-.69.999-1.522h2.355q-.5 1.854-1.903 2.972T164.141 39q-1.878 0-3.234-.832a5.44 5.44 0 0 1-2.069-2.283q-.69-1.45-.69-3.33 0-1.902.714-3.353a5.44 5.44 0 0 1 2.093-2.259q1.355-.808 3.186-.808 2.734 0 4.233 1.664 1.522 1.665 1.522 4.519m-2.449-.951q0-1.451-.928-2.379-.928-.95-2.449-.95-1.475 0-2.45.927-.975.904-1.07 2.401zM152.514 26.158q1.784 0 2.901 1.046 1.141 1.023 1.141 3.02v8.419h-2.354v-7.776q0-1.26-.594-1.974-.595-.738-1.855-.737-1.499 0-2.402.832-.88.832-.88 2.212v7.443h-2.33V26.515h2.33v1.522h.048q.547-.81 1.545-1.332 1-.546 2.45-.547M138.377 39q-1.855 0-3.235-.809a5.4 5.4 0 0 1-2.116-2.259q-.714-1.45-.714-3.353 0-1.878.738-3.329.737-1.474 2.092-2.283 1.38-.832 3.235-.832t3.21.808a5.36 5.36 0 0 1 2.116 2.283q.738 1.45.738 3.33 0 1.902-.738 3.376a5.4 5.4 0 0 1-2.116 2.26q-1.356.807-3.21.808m0-1.926q1.783 0 2.711-1.237.927-1.26.927-3.258t-.927-3.234q-.928-1.26-2.711-1.26-1.808 0-2.735 1.236-.904 1.237-.904 3.258 0 1.998.928 3.258.927 1.237 2.711 1.237M130.539 36.86q.429 0 .999-.095v1.878a8 8 0 0 1-1.498.143q-1.593 0-2.402-.785-.784-.784-.784-2.782v-6.777h-1.76v-1.927h1.76v-3.9h2.33v3.9h2.33v1.927h-2.33v6.848q0 .928.285 1.26.31.31 1.07.31M117.841 28.657q2.163.546 3.424 1.046 1.26.5 2.093 1.498.856.975.856 2.664 0 2.307-1.593 3.71-1.57 1.402-4.638 1.402-2.164 0-3.828-.713-1.665-.737-2.64-2.093-.975-1.38-1.046-3.258h2.711q.143 1.808 1.284 2.83 1.165 1 3.448 1 3.567 0 3.567-2.736 0-1.022-.523-1.593-.5-.57-1.356-.856-.832-.285-2.877-.808-1.712-.452-2.877-.928a5.24 5.24 0 0 1-1.927-1.427q-.784-.95-.784-2.45 0-2.187 1.593-3.4 1.593-1.236 4.352-1.236 2.925 0 4.684 1.426 1.784 1.427 1.974 3.972h-2.734q-.19-1.57-1.142-2.355-.952-.807-2.782-.808-1.593 0-2.426.57-.808.571-.808 1.69 0 .903.499 1.426.523.523 1.26.808.762.262 2.236.619M104.893 38.645h-2.83l-1.237-1.522q-2.02 1.854-4.875 1.855-1.641 0-2.853-.571-1.19-.595-1.808-1.593-.618-1.023-.618-2.307 0-1.736 1.022-2.854 1.023-1.117 2.878-2.164-1.023-1.26-1.498-2.164a4.3 4.3 0 0 1-.476-1.997q0-1.047.5-1.974a3.67 3.67 0 0 1 1.474-1.475q.975-.57 2.33-.57 1.308 0 2.236.546a3.75 3.75 0 0 1 1.45 1.451q.5.904.5 1.998 0 1.426-.856 2.402-.857.975-2.711 2.069l3.21 3.852q.666-1.356.999-3.306h2.235q-.404 2.95-1.76 5.09zm-8.038-15.268q-.927 0-1.45.595-.525.57-.524 1.38 0 .689.38 1.426.381.713 1.142 1.665 1.26-.738 1.831-1.427.57-.69.57-1.546 0-.904-.522-1.498-.524-.594-1.427-.594m-.714 13.389q1.904 0 3.282-1.332l-3.757-4.59q-1.284.786-1.95 1.594a2.7 2.7 0 0 0-.642 1.76q0 1.14.808 1.855.809.713 2.26.713M84.576 32.318q0 .69-.024.88H75.23q.048 1.64.975 2.782.951 1.118 2.663 1.118 1.427 0 2.188-.666.761-.69.999-1.522h2.354q-.5 1.854-1.902 2.972Q81.103 39 78.82 39q-1.879 0-3.234-.832a5.44 5.44 0 0 1-2.07-2.283q-.689-1.45-.689-3.33 0-1.902.713-3.353a5.44 5.44 0 0 1 2.093-2.259q1.356-.808 3.187-.808 2.734 0 4.233 1.664 1.522 1.665 1.522 4.519m-2.45-.951q0-1.451-.927-2.379-.927-.95-2.45-.95-1.474 0-2.449.927-.975.904-1.07 2.401zM68.805 38.644V21.64h2.33v17.003zM64 24.351v-2.544h2.616v2.544zm2.473 14.292h-2.33V26.515h2.33zM57.68 38.644h-2.64V23.9h-5.493v-2.26h13.626v2.26H57.68zM118.664 17.093V.09h2.331v17.003zM113.984 17.093V.09h2.331v17.003zM112.279 10.767q0 .69-.024.88h-9.322q.048 1.64.975 2.782.951 1.118 2.663 1.118 1.428 0 2.188-.666.762-.69.999-1.522h2.354q-.5 1.855-1.902 2.973-1.403 1.117-3.686 1.117-1.88 0-3.234-.832a5.43 5.43 0 0 1-2.069-2.283q-.69-1.45-.69-3.33 0-1.902.714-3.352a5.44 5.44 0 0 1 2.092-2.26q1.356-.808 3.187-.808 2.734 0 4.233 1.665 1.522 1.664 1.522 4.518m-2.45-.951q0-1.45-.927-2.378-.927-.952-2.449-.952-1.475 0-2.45.928-.975.903-1.07 2.402zM93.492 17.093 89.164 4.965h2.497l3.163 9.726h.047l3.116-9.726h2.449l-4.328 12.128zM87.675 4.68q.57 0 1.118.071v2.235a5.5 5.5 0 0 0-.785-.07q-1.593-.001-2.616 1.093-1.023 1.095-1.022 2.806v6.278h-2.33V4.965h2.33v2.307h.047q1.047-2.592 3.258-2.592M73.096 17.426q-1.808 0-2.9-.952-1.071-.951-1.071-2.52 0-1.308.594-2.093.62-.785 1.689-1.213 1.07-.452 2.782-.785 1.166-.214 1.76-.38.594-.19.951-.5.357-.333.357-.903 0-1.617-2.307-1.617-1.546 0-2.164.523t-.713 1.76h-2.378q.094-1.88 1.403-3.02 1.308-1.142 3.947-1.142 2.046 0 3.258.999 1.237.975 1.237 3.186v5.565q0 .69.119 1.023.119.309.452.309l.285-.024v1.427a5.3 5.3 0 0 1-1.19.142q-.879 0-1.355-.404-.45-.427-.547-1.427h-.047a4.3 4.3 0 0 1-1.665 1.522q-1.046.524-2.497.523m.523-1.88q1.641 0 2.64-.808.999-.832.999-2.378v-1.736q-.262.239-.927.452-.643.19-1.737.428-1.64.357-2.33.856-.69.5-.69 1.427 0 .88.476 1.332.5.428 1.57.428M53.139 17.093H50.57V.09h3.449l4.898 13.365h.048L63.887.09h3.449v17.003h-2.569V3.895h-.047l-4.685 13.198h-2.164L53.186 3.895h-.047z" fill="currentColor"/>
+        </svg>
       </a>
 
-      <div className="site-footer__content">
-        <span>© 2025 Marvell Tile &amp; Stone</span>
-        <ul className="site-footer__links">
+      <div className="footer__content">
+        <p>© 2025 Marvell Tile &amp; Stone</p>
+        <ul className="footer__links">
           <li>
             <a href="/privacy-policy/">Privacy</a>
           </li>
@@ -95,13 +137,15 @@ export default function Footer() {
             <a href="/terms-and-conditions/">Terms &amp; Conditions</a>
           </li>
         </ul>
-        <span>
+        <p>
           Website by{' '}
-          <a href="https://www.humaan.com/">Humaan</a>
-        </span>
+          <a href="https://www.humaan.com/" style={{ color: 'inherit', textDecoration: 'none' }}>
+            Humaan
+          </a>
+        </p>
       </div>
 
-      <ul className="site-footer__socials">
+      <ul className="footer__socials">
         <li>
           <a
             href="https://www.instagram.com/marvelltileandstone/"
@@ -109,7 +153,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <InstagramIcon className="site-footer__social-icon" />
+            <InstagramIcon width={16} height={16} />
           </a>
         </li>
         <li>
@@ -119,7 +163,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FacebookIcon className="site-footer__social-icon" />
+            <FacebookIcon width={16} height={16} />
           </a>
         </li>
       </ul>
