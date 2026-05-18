@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="260" height="260"><svg width="260" height="260" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="260" height="260" fill="black" fill-opacity="0.8"></rect>
+<path d="M190 50H185V210H190V50Z" fill="#B1A781"></path>
+<path d="M200 50H195V210H200V50Z" fill="#B1A781"></path>
+<path d="M210 50H205V210H210V50Z" fill="#B1A781"></path>
+<path d="M220 50H215V210H220V50Z" fill="#B1A781"></path>
+<path d="M130 130L132.5 134.442L175 58.8917V67.7833L135 138.892L130 130L85 50H80V210H85V130L129.925 209.867L132.425 205.433L84.9917 121.117V112.225L134.925 201L137.425 196.567L84.9833 103.342V94.45L139.925 192.125L142.425 187.692L85 85.5583V76.6667L144.95 183.242L147.45 178.808L85 67.775V58.8833L149.958 174.367L152.458 169.933L152.492 170L174.992 130V210H179.992V50H174.992L129.992 130H130ZM175 103.333L145 156.667L147.5 161.108L175 112.217V121.108L150 165.55L145 156.658L142.5 152.217L175 94.4417V103.333ZM175 85.5583L140 147.783L141.25 150.008L137.5 143.342L175 76.675V85.5667V85.5583Z" fill="#B1A781"></path>
+<path d="M45 50H40V210H45V50Z" fill="#B1A781"></path>
+<path d="M55 50H50V210H55V50Z" fill="#B1A781"></path>
+<path d="M65 50H60V210H65V50Z" fill="#B1A781"></path>
+<path d="M75 50H70V210H75V50Z" fill="#B1A781"></path>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>
