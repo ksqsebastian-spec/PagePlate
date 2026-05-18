@@ -20,7 +20,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
       const timer = setTimeout(() => {
         setDisplayChildren(children);
         setTransitioning(false);
-      }, 350);
+      }, 700);
 
       return () => clearTimeout(timer);
     } else {
@@ -40,9 +40,9 @@ export default function PageTransition({ children }: { children: ReactNode }) {
             animate={{
               scaleY: [0, 1, 1, 0],
               transition: {
-                duration: 0.7,
+                duration: 1.4,
                 ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
-                times: [0, 0.4, 0.6, 1],
+                times: [0, 0.35, 0.55, 1],
               },
             }}
             style={{
@@ -65,9 +65,9 @@ export default function PageTransition({ children }: { children: ReactNode }) {
           opacity: 1,
           y: 0,
           transition: {
-            duration: 0.5,
+            duration: 0.8,
             ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-            delay: 0.15,
+            delay: 0.3,
           },
         }}
       >
