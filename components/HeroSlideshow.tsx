@@ -41,13 +41,10 @@ export default function HeroSlideshow({
       <AnimatePresence initial={false}>
         <motion.div
           key={index}
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{
-            opacity: { duration: 1.2, ease: "easeInOut" },
-            scale: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
-          }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
           style={{ position: "absolute", inset: 0 }}
         >
           <Image

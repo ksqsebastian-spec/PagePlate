@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
@@ -16,13 +16,9 @@ export default function CustomCursor() {
   const x = useSpring(cursorX, springConfig);
   const y = useSpring(cursorY, springConfig);
 
-  const onOverInteractive = useCallback(() => setHovered(true), []);
-  const onOutInteractive = useCallback(() => setHovered(false), []);
-
   useEffect(() => {
     setMounted(true);
 
-    // Detect touch devices — no custom cursor on mobile
     isTouchDevice.current =
       "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (isTouchDevice.current) return;
@@ -30,7 +26,7 @@ export default function CustomCursor() {
     const onMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-      setVisible(true);
+      if (!visible) setVisible(true);
     };
 
     const onLeave = () => setVisible(false);
@@ -40,43 +36,40 @@ export default function CustomCursor() {
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("mouseenter", onEnter);
 
-    // Observe interactive elements for hover state
+    // Use event delegation on document instead of attaching to every element
     const interactiveSelector =
       "a, button, [role='button'], input, textarea, select, [data-cursor-hover]";
 
-    const attachListeners = () => {
-      const els = document.querySelectorAll(interactiveSelector);
-      els.forEach((el) => {
-        el.removeEventListener("mouseenter", onOverInteractive);
-        el.removeEventListener("mouseleave", onOutInteractive);
-        el.addEventListener("mouseenter", onOverInteractive);
-        el.addEventListener("mouseleave", onOutInteractive);
-      });
+    const onOver = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(interactiveSelector)) {
+        setHovered(true);
+      }
     };
 
-    // Initial attach + MutationObserver for dynamic elements
-    attachListeners();
+    const onOut = (e: Event) => {
+      const target = e.target as HTMLElement;
+      const related = (e as MouseEvent).relatedTarget as HTMLElement | null;
+      if (
+        target.closest(interactiveSelector) &&
+        (!related || !related.closest(interactiveSelector))
+      ) {
+        setHovered(false);
+      }
+    };
 
-    const observer = new MutationObserver(() => {
-      attachListeners();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseout", onOut, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
-      observer.disconnect();
-
-      const els = document.querySelectorAll(interactiveSelector);
-      els.forEach((el) => {
-        el.removeEventListener("mouseenter", onOverInteractive);
-        el.removeEventListener("mouseleave", onOutInteractive);
-      });
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
     };
-  }, [cursorX, cursorY, onOverInteractive, onOutInteractive]);
+  }, [cursorX, cursorY, visible]);
 
-  // Don't render on server or on touch devices
   if (!mounted) return null;
   if (isTouchDevice.current) return null;
 
@@ -93,6 +86,7 @@ export default function CustomCursor() {
         mixBlendMode: "difference",
         translateX: "-50%",
         translateY: "-50%",
+        willChange: "transform",
       }}
       animate={{
         width: hovered ? 3 : 24,

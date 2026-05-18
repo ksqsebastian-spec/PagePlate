@@ -189,7 +189,7 @@ export default function ContactPage() {
               }}
             >
               <Image
-                src={img.src + "?tr=w-600,q-70"}
+                src={img.src + "?tr=w-800,q-80"}
                 alt={img.alt}
                 fill
                 loading="lazy"

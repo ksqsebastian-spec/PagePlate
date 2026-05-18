@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function ProjectMosaic({ images }: Props) {
-  // Arrange images in rows: first row 3 images, second row 3 images, etc.
   const rows: string[][] = [];
   for (let i = 0; i < images.length; i += 3) {
     rows.push(images.slice(i, i + 3));
@@ -28,13 +27,13 @@ export default function ProjectMosaic({ images }: Props) {
           {row.map((src, ci) => (
             <motion.div
               key={ci}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{
                 duration: 0.6,
                 delay: ci * 0.1,
-                ease: [0.25, 0.1, 0.25, 1],
+                ease: "easeOut",
               }}
               style={{
                 position: "relative",
@@ -44,9 +43,10 @@ export default function ProjectMosaic({ images }: Props) {
               }}
             >
               <Image
-                src={src + "?tr=w-800,q-75"}
+                src={src + "?tr=w-800,q-80"}
                 alt={`Project image ${ri + 1}-${ci + 1}`}
                 fill
+                loading="lazy"
                 style={{ objectFit: "cover" }}
                 sizes="(max-width: 768px) 100vw, 33vw"
               />

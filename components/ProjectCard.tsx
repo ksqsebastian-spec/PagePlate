@@ -1,9 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 type Props = {
   slug: string;
@@ -22,50 +20,29 @@ export default function ProjectCard({
   alt,
   style,
 }: Props) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <Link
       href={`/projects/${slug}`}
+      className="project-card"
       style={{
         display: "block",
         position: "relative",
         overflow: "hidden",
         ...style,
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
-      <motion.div
-        animate={{ scale: hovered ? 1.05 : 1 }}
-        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-        style={{ width: "100%", height: "100%" }}
-      >
+      <div className="project-card__image" style={{ width: "100%", height: "100%" }}>
         <Image
-          src={image + "?tr=w-500,q-65"}
+          src={image + "?tr=w-800,q-80"}
           alt={alt || title}
           fill
           loading="lazy"
           style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 50vw, 25vw"
+          sizes="(max-width: 768px) 50vw, 33vw"
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={false}
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 40%, transparent 100%)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          padding: "24px",
-        }}
-      >
+      <div className="project-card__overlay">
         <span
           style={{
             fontSize: "15px",
@@ -77,18 +54,20 @@ export default function ProjectCard({
         >
           {title}
         </span>
-        <span
-          style={{
-            fontSize: "12px",
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.7)",
-            marginTop: "4px",
-            letterSpacing: "0.02em",
-          }}
-        >
-          {tagline}
-        </span>
-      </motion.div>
+        {tagline && (
+          <span
+            style={{
+              fontSize: "12px",
+              fontWeight: 300,
+              color: "rgba(255,255,255,0.7)",
+              marginTop: "4px",
+              letterSpacing: "0.02em",
+            }}
+          >
+            {tagline}
+          </span>
+        )}
+      </div>
     </Link>
   );
 }
