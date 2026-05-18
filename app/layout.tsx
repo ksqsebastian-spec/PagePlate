@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import LenisProvider from "@/components/LenisProvider";
+import CustomCursor from "@/components/CustomCursor";
+import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "Seehafer Elemente | Stone & Tile Artisans",
@@ -34,8 +36,9 @@ export default function RootLayout({
       </head>
       <body className="min-h-full">
         <LenisProvider>
+          <CustomCursor />
           <Navbar />
-          {children}
+          <PageTransition>{children}</PageTransition>
         </LenisProvider>
       </body>
     </html>

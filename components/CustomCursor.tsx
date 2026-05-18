@@ -1,0 +1,115 @@
+"use client";
+
+import { useEffect, useState, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+
+export default function CustomCursor() {
+  const [hovered, setHovered] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const isTouchDevice = useRef(false);
+
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
+  const x = useSpring(cursorX, springConfig);
+  const y = useSpring(cursorY, springConfig);
+
+  useEffect(() => {
+    // Detect touch devices — no custom cursor on mobile
+    isTouchDevice.current =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice.current) return;
+
+    const onMove = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      if (!visible) setVisible(true);
+    };
+
+    const onLeave = () => setVisible(false);
+    const onEnter = () => setVisible(true);
+
+    window.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseenter", onEnter);
+
+    // Observe interactive elements for hover state
+    const interactiveSelector =
+      "a, button, [role='button'], input, textarea, select, [data-cursor-hover]";
+
+    const onOverInteractive = () => setHovered(true);
+    const onOutInteractive = () => setHovered(false);
+
+    const attachListeners = () => {
+      const els = document.querySelectorAll(interactiveSelector);
+      els.forEach((el) => {
+        el.addEventListener("mouseenter", onOverInteractive);
+        el.addEventListener("mouseleave", onOutInteractive);
+      });
+    };
+
+    // Initial attach + MutationObserver for dynamic elements
+    attachListeners();
+
+    const observer = new MutationObserver(() => {
+      attachListeners();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseenter", onEnter);
+      observer.disconnect();
+
+      const els = document.querySelectorAll(interactiveSelector);
+      els.forEach((el) => {
+        el.removeEventListener("mouseenter", onOverInteractive);
+        el.removeEventListener("mouseleave", onOutInteractive);
+      });
+    };
+  }, [cursorX, cursorY, visible]);
+
+  // Don't render anything on touch devices (checked client-side via opacity)
+  // We always render the element but hide it server-side and on touch devices
+  if (typeof window !== "undefined" && isTouchDevice.current) return null;
+
+  return (
+    <motion.div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        x,
+        y,
+        pointerEvents: "none",
+        zIndex: 9999,
+        mixBlendMode: "difference",
+        translateX: "-50%",
+        translateY: "-50%",
+      }}
+      animate={{
+        width: hovered ? 3 : 24,
+        height: hovered ? 32 : 24,
+        borderRadius: hovered ? "1px" : "50%",
+        opacity: visible ? 1 : 0,
+      }}
+      transition={{
+        width: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] },
+        height: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] },
+        borderRadius: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] },
+        opacity: { duration: 0.15 },
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "#ffffff",
+          borderRadius: "inherit",
+        }}
+      />
+    </motion.div>
+  );
+}
