@@ -3,14 +3,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-/* Original cycles: Traditional / Marvell / Craftsmanship / Tile / & / Stone
- * We mirror the rhythm: Handwerk / Seehafer / Craftsmanship / Tile / & / Stone -> branded version */
 const WORDS = ["Craftsmanship", "Seehafer", "Elemente"];
 const INTERVAL = 2400;
 
 export default function HeroCycle() {
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     if (done) return;
@@ -28,18 +27,27 @@ export default function HeroCycle() {
     return () => clearInterval(id);
   }, [done]);
 
+  // After cycle finishes, show final text briefly then fade away
+  useEffect(() => {
+    if (!done) return;
+    const timer = setTimeout(() => setHidden(true), 1800);
+    return () => clearTimeout(timer);
+  }, [done]);
+
+  if (hidden) return null;
+
   return (
-    <section
+    <motion.section
+      animate={hidden ? { height: 0, opacity: 0 } : {}}
+      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
       style={{
-        height: done ? "auto" : "100dvh",
-        minHeight: done ? undefined : "100dvh",
+        height: "100dvh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
         padding: "0 32px",
         backgroundColor: "#E9E4DF",
-        transition: "height 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)",
       }}
     >
       <AnimatePresence mode="wait">
@@ -71,19 +79,19 @@ export default function HeroCycle() {
             key="final"
             initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -40, filter: "blur(6px)" }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             style={{
               fontFamily: "var(--font-display), sans-serif",
               fontSize: "clamp(48px, 12vw, 220px)",
               fontWeight: 500,
-              lineHeight: 0.9,
+              lineHeight: 0.95,
               letterSpacing: "-0.03em",
               textTransform: "uppercase",
               color: "#1a1a1a",
               margin: 0,
               textAlign: "center",
               userSelect: "none",
-              padding: "120px 0 80px",
             }}
           >
             Seehafer
@@ -92,6 +100,6 @@ export default function HeroCycle() {
           </motion.h1>
         )}
       </AnimatePresence>
-    </section>
+    </motion.section>
   );
 }

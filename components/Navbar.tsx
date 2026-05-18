@@ -36,25 +36,28 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: "20px 32px",
+          padding: "16px 32px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          mixBlendMode: "difference",
+          backgroundColor: "rgba(233, 228, 223, 0.85)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(0,0,0,0.06)",
         }}
       >
         <motion.div
-          whileHover={{ scale: 1.15 }}
+          whileHover={{ scale: 1.08, opacity: 0.7 }}
           transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <Link
             href="/"
             style={{
               fontSize: "13px",
-              fontWeight: 500,
+              fontWeight: 600,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#fff",
+              color: "#1a1a1a",
               lineHeight: 1,
               whiteSpace: "nowrap",
               display: "inline-block",
@@ -73,88 +76,106 @@ export default function Navbar() {
           }}
           className="hidden md:flex"
         >
-          {navLinks.map((link) => (
-            <div
-              key={link.href}
-              style={{ position: "relative" }}
-              onMouseEnter={link.hasDropdown ? openDropdown : undefined}
-              onMouseLeave={link.hasDropdown ? closeDropdown : undefined}
-            >
-              <motion.div
-                whileHover={{ scale: 1.15 }}
-                transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          {navLinks.map((link) => {
+            const isActive = pathname.startsWith(link.href);
+            return (
+              <div
+                key={link.href}
+                style={{ position: "relative" }}
+                onMouseEnter={link.hasDropdown ? openDropdown : undefined}
+                onMouseLeave={link.hasDropdown ? closeDropdown : undefined}
               >
-                <Link
-                  href={link.href}
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: 400,
-                    letterSpacing: "0.06em",
-                    color: "#fff",
-                    opacity: pathname.startsWith(link.href) ? 1 : 0.7,
-                    display: "inline-block",
-                  }}
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                  style={{ position: "relative" }}
                 >
-                  {link.label}
-                </Link>
-              </motion.div>
-
-              {/* Projects dropdown */}
-              {link.hasDropdown && (
-                <AnimatePresence>
-                  {dropdownOpen && (
+                  <Link
+                    href={link.href}
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: isActive ? 600 : 400,
+                      letterSpacing: "0.06em",
+                      color: "#1a1a1a",
+                      display: "inline-block",
+                      transition: "opacity 0.2s ease",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                  {/* Active underline */}
+                  {isActive && (
                     <motion.div
-                      initial={{ opacity: 0, y: -4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                      layoutId="nav-underline"
                       style={{
                         position: "absolute",
-                        top: "100%",
+                        bottom: -4,
+                        left: 0,
                         right: 0,
-                        marginTop: "12px",
-                        padding: "16px 20px",
-                        backgroundColor: "rgba(26, 26, 26, 0.95)",
-                        backdropFilter: "blur(12px)",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "8px",
-                        minWidth: "180px",
-                        mixBlendMode: "normal",
+                        height: "1.5px",
+                        backgroundColor: "#1a1a1a",
                       }}
-                    >
-                      {projects.map((p) => (
-                        <Link
-                          key={p.slug}
-                          href={`/projects/${p.slug}`}
-                          style={{
-                            fontSize: "12px",
-                            fontWeight: 400,
-                            letterSpacing: "0.04em",
-                            color: "#fff",
-                            opacity: pathname === `/projects/${p.slug}` ? 1 : 0.6,
-                            whiteSpace: "nowrap",
-                            transition: "opacity 0.15s ease",
-                            padding: "4px 0",
-                          }}
-                          onMouseEnter={(e) => {
-                            (e.target as HTMLElement).style.opacity = "1";
-                          }}
-                          onMouseLeave={(e) => {
-                            if (pathname !== `/projects/${p.slug}`) {
-                              (e.target as HTMLElement).style.opacity = "0.6";
-                            }
-                          }}
-                        >
-                          {p.title}
-                        </Link>
-                      ))}
-                    </motion.div>
+                      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
                   )}
-                </AnimatePresence>
-              )}
-            </div>
-          ))}
+                </motion.div>
+
+                {/* Projects dropdown */}
+                {link.hasDropdown && (
+                  <AnimatePresence>
+                    {dropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          right: 0,
+                          marginTop: "16px",
+                          padding: "16px 20px",
+                          backgroundColor: "rgba(26, 26, 26, 0.95)",
+                          backdropFilter: "blur(12px)",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "8px",
+                          minWidth: "180px",
+                        }}
+                      >
+                        {projects.map((p) => (
+                          <Link
+                            key={p.slug}
+                            href={`/projects/${p.slug}`}
+                            style={{
+                              fontSize: "12px",
+                              fontWeight: 400,
+                              letterSpacing: "0.04em",
+                              color: "#fff",
+                              opacity: pathname === `/projects/${p.slug}` ? 1 : 0.6,
+                              whiteSpace: "nowrap",
+                              transition: "opacity 0.15s ease",
+                              padding: "4px 0",
+                            }}
+                            onMouseEnter={(e) => {
+                              (e.target as HTMLElement).style.opacity = "1";
+                            }}
+                            onMouseLeave={(e) => {
+                              if (pathname !== `/projects/${p.slug}`) {
+                                (e.target as HTMLElement).style.opacity = "0.6";
+                              }
+                            }}
+                          >
+                            {p.title}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </div>
+            );
+          })}
         </nav>
 
         {/* Mobile hamburger */}
@@ -167,7 +188,7 @@ export default function Navbar() {
             border: "none",
             cursor: "pointer",
             padding: "4px",
-            color: "#fff",
+            color: "#1a1a1a",
             fontSize: "20px",
           }}
         >
