@@ -111,8 +111,7 @@ export default function Navbar() {
                       style={{
                         position: "absolute",
                         top: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
+                        right: 0,
                         marginTop: "12px",
                         padding: "16px 20px",
                         backgroundColor: "rgba(26, 26, 26, 0.95)",

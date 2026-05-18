@@ -14,22 +14,12 @@ const contactHero = ik(
   "bad8fdd3786e6b872fb2a83eaf79b1d8a018a6d5_LbzsasWfc.jpg"
 );
 
-/* Gallery images shown below contact info — mirrors the original site */
+/* Gallery images shown below contact info */
 const galleryImages = [
   { src: ik("Ainslie-hero-4_F1io4B-1M.jpg"), alt: "Bathroom with freestanding bath and stone floors", cols: 3, rows: 2 },
-  { src: ik("Ainslie-hero-1_Y69UuUFHo.jpg"), alt: "Stairs with stone flooring", cols: 3, rows: 3 },
-  { src: ik("ainslie-hero-2_sGveNwFj2.jpg"), alt: "Freestanding bath in front of tiled wall", cols: 3, rows: 2 },
-  { src: ik("7BeachStCottesloe06-1_B2fHLj5HK.jpg"), alt: "Mid-century kitchen with olive green tiles", cols: 3, rows: 3 },
-  { src: ik("beach-hero2_YQu3Ez8dF.jpg"), alt: "Scullery with olive green accent tiling", cols: 2, rows: 3 },
-  { src: ik("beach-hero3_cR8J5KV8i.jpg"), alt: "Mid-century bathroom with flute glass", cols: 2, rows: 3 },
-  { src: ik("project-hero-image-4x3-1_YbVT424zo.jpg"), alt: "Brick tiled ceiling wardrobe", cols: 2, rows: 2 },
-  { src: ik("L1000063-HDR_uMBJZwcw3.jpg"), alt: "Large glass window with brick ceiling", cols: 3, rows: 3 },
-  { src: ik("Eco-hero1_tteDCH2kp.jpg"), alt: "Eco Outdoor showroom", cols: 3, rows: 2 },
-  { src: ik("325-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS_Hy8PMlvJs.JPG"), alt: "Wide bathroom view", cols: 2, rows: 3 },
-  { src: ik("32250_2-1_Hskawwzb1.jpg"), alt: "Kitchen with cream tile splash-back", cols: 3, rows: 2 },
+  { src: ik("project-hero-image-4x3-1_YbVT424zo.jpg"), alt: "Brick tiled ceiling wardrobe", cols: 3, rows: 3 },
   { src: ik("DSC_3568-cropped_YHAqn7tTJ.jpg"), alt: "Stonework on stairs", cols: 3, rows: 2 },
-  { src: ik("DSC_8846_qQYBah9oW.jpeg"), alt: "Private pool with stone border", cols: 2, rows: 3 },
-  { src: ik("Vivaldi_LRs09_HUvS8VBnJ.jpg"), alt: "Vivaldi bathroom", cols: 3, rows: 2 },
+  { src: ik("Eco-hero1_tteDCH2kp.jpg"), alt: "Eco Outdoor showroom", cols: 3, rows: 2 },
 ];
 
 export default function ContactPage() {
@@ -199,11 +189,12 @@ export default function ContactPage() {
               }}
             >
               <Image
-                src={img.src + "?tr=w-800,q-75"}
+                src={img.src + "?tr=w-600,q-70"}
                 alt={img.alt}
                 fill
+                loading="lazy"
                 style={{ objectFit: "cover" }}
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) 50vw, 33vw"
               />
             </div>
           ))}
