@@ -19,10 +19,10 @@ export default function ProjectMosaic({ images }: Props) {
       {rows.map((row, ri) => (
         <div
           key={ri}
+          className="mosaic-row"
           style={{
             display: "flex",
             gap: "2px",
-            height: "420px",
           }}
         >
           {row.map((src, ci) => (
@@ -40,6 +40,7 @@ export default function ProjectMosaic({ images }: Props) {
                 position: "relative",
                 flex: ci === 0 ? 2 : 1,
                 overflow: "hidden",
+                aspectRatio: ci === 0 ? "16/9" : "4/5",
               }}
             >
               <Image

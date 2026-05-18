@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
   const [hovered, setHovered] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const isTouchDevice = useRef(false);
 
   const cursorX = useMotionValue(-100);
@@ -15,7 +16,12 @@ export default function CustomCursor() {
   const x = useSpring(cursorX, springConfig);
   const y = useSpring(cursorY, springConfig);
 
+  const onOverInteractive = useCallback(() => setHovered(true), []);
+  const onOutInteractive = useCallback(() => setHovered(false), []);
+
   useEffect(() => {
+    setMounted(true);
+
     // Detect touch devices — no custom cursor on mobile
     isTouchDevice.current =
       "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -24,13 +30,13 @@ export default function CustomCursor() {
     const onMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-      if (!visible) setVisible(true);
+      setVisible(true);
     };
 
     const onLeave = () => setVisible(false);
     const onEnter = () => setVisible(true);
 
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("mouseenter", onEnter);
 
@@ -38,12 +44,11 @@ export default function CustomCursor() {
     const interactiveSelector =
       "a, button, [role='button'], input, textarea, select, [data-cursor-hover]";
 
-    const onOverInteractive = () => setHovered(true);
-    const onOutInteractive = () => setHovered(false);
-
     const attachListeners = () => {
       const els = document.querySelectorAll(interactiveSelector);
       els.forEach((el) => {
+        el.removeEventListener("mouseenter", onOverInteractive);
+        el.removeEventListener("mouseleave", onOutInteractive);
         el.addEventListener("mouseenter", onOverInteractive);
         el.addEventListener("mouseleave", onOutInteractive);
       });
@@ -69,11 +74,11 @@ export default function CustomCursor() {
         el.removeEventListener("mouseleave", onOutInteractive);
       });
     };
-  }, [cursorX, cursorY, visible]);
+  }, [cursorX, cursorY, onOverInteractive, onOutInteractive]);
 
-  // Don't render anything on touch devices (checked client-side via opacity)
-  // We always render the element but hide it server-side and on touch devices
-  if (typeof window !== "undefined" && isTouchDevice.current) return null;
+  // Don't render on server or on touch devices
+  if (!mounted) return null;
+  if (isTouchDevice.current) return null;
 
   return (
     <motion.div

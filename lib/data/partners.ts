@@ -4,16 +4,18 @@ export type Partner = {
 };
 
 export const partners: Partner[] = [
+  { name: "Talo Construction", url: "#" },
+  { name: "Statuo Group", url: "#" },
+  { name: "Red Cloud Building Co", url: "#" },
+  { name: "Xon Construction", url: "#" },
   { name: "Arklen", url: "#" },
-  { name: "Talo Constructions", url: "#" },
-  { name: "Red Cloud Building", url: "#" },
-  { name: "Salt KB", url: "#" },
-  { name: "RK Brine Master Builder", url: "#" },
+  { name: "Gavin Hestelow Architect", url: "#" },
   { name: "Robeson Architects", url: "#" },
-  { name: "Space Agency Architects", url: "#" },
-  { name: "Lahaus", url: "#" },
-  { name: "Jess O'Shea Designs", url: "#" },
+  { name: "White Studio & Co", url: "#" },
+  { name: "13 Interiors", url: "#" },
+  { name: "Ascher Smith", url: "#" },
   { name: "Eco Outdoor", url: "#" },
+  { name: "Gather Co", url: "#" },
+  { name: "m2 Tiles", url: "#" },
   { name: "Artedomus", url: "#" },
-  { name: "Bernini", url: "#" },
 ];

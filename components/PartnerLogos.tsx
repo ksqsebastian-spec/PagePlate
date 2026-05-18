@@ -25,7 +25,7 @@ export default function PartnerLogos() {
           marginBottom: "36px",
         }}
       >
-        Trusted by Perth&apos;s best designers &amp; builders
+        Trusted by the best designers &amp; builders
       </h3>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 0 }}>

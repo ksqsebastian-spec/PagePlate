@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import PartnerLogos from "@/components/PartnerLogos";
 import ServiceSection from "@/components/ServiceSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import ProfileCarousel from "@/components/ProfileCarousel";
 import Footer from "@/components/Footer";
 import { services } from "@/lib/data/services";
 import { testimonials } from "@/lib/data/testimonials";
@@ -133,7 +134,7 @@ export default function ProfilePage() {
             fontWeight: 300,
           }}
         >
-          &mdash;&mdash;&mdash; Our six-member team — four master tradesmen and
+          &mdash;&mdash;&mdash; Our seven-member team — five master tradesmen and
           two apprentices — pairs exceptional skill with precision and
           efficiency. Approachable yet meticulous, we deliver projects swiftly
           while maintaining the highest standards, consistently exceeding
@@ -141,35 +142,8 @@ export default function ProfilePage() {
         </p>
       </section>
 
-      {/* Team photo grid */}
-      <section style={{ padding: "0 32px 72px" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "2px",
-          }}
-        >
-          {teamImages.map((src, n) => (
-            <div
-              key={n}
-              style={{
-                position: "relative",
-                aspectRatio: "5/4",
-                overflow: "hidden",
-              }}
-            >
-              <Image
-                src={src + "?tr=w-480,q-75"}
-                alt={`Team photo ${n + 1}`}
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="25vw"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Photo carousel — matches the original's image slider with prev/next */}
+      <ProfileCarousel />
 
       {/* Services */}
       <section style={{ padding: "0 32px" }}>

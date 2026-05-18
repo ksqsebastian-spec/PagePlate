@@ -10,6 +10,7 @@ type Props = {
   title: string;
   tagline: string;
   image: string;
+  alt?: string;
   style?: React.CSSProperties;
 };
 
@@ -18,6 +19,7 @@ export default function ProjectCard({
   title,
   tagline,
   image,
+  alt,
   style,
 }: Props) {
   const [hovered, setHovered] = useState(false);
@@ -41,7 +43,7 @@ export default function ProjectCard({
       >
         <Image
           src={image + "?tr=w-800,q-75"}
-          alt={title}
+          alt={alt || title}
           fill
           style={{ objectFit: "cover" }}
           sizes="(max-width: 768px) 100vw, 50vw"

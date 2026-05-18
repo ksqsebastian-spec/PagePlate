@@ -3,6 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+/* Original cycles: Traditional / Marvell / Craftsmanship / Tile / & / Stone
+ * We mirror the rhythm: Handwerk / Seehafer / Craftsmanship / Tile / & / Stone -> branded version */
 const WORDS = ["Craftsmanship", "Seehafer", "Elemente"];
 const INTERVAL = 2400;
 
@@ -44,9 +46,9 @@ export default function HeroCycle() {
         {!done ? (
           <motion.h1
             key={index}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
+            initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -30, filter: "blur(4px)" }}
             transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
             style={{
               fontFamily: "var(--font-display), sans-serif",
@@ -67,8 +69,8 @@ export default function HeroCycle() {
         ) : (
           <motion.h1
             key="final"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             style={{
               fontFamily: "var(--font-display), sans-serif",
