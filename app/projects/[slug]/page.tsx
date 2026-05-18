@@ -1,6 +1,7 @@
 import HeroSlideshow from "@/components/HeroSlideshow";
 import NextProjectLink from "@/components/NextProjectLink";
 import ProjectMosaic from "@/components/ProjectMosaic";
+import ProjectHeroText from "@/components/ProjectHeroText";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import Footer from "@/components/Footer";
 import { getProject, projects } from "@/lib/data/projects";
@@ -41,79 +42,12 @@ export default async function ProjectPage({ params }: Props) {
       {/* Hero slideshow */}
       <HeroSlideshow images={heroImages} height="100dvh" />
 
-      {/* Title + Meta */}
-      <section
-        style={{
-          padding: "56px 32px 48px",
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          gap: "32px",
-          alignItems: "start",
-          borderBottom: "1px solid rgba(0,0,0,0.1)",
-        }}
-      >
-        <div>
-          <h1
-            style={{
-              fontFamily: "var(--font-display), sans-serif",
-              fontSize: "clamp(48px, 10vw, 140px)",
-              fontWeight: 500,
-              lineHeight: 0.9,
-              letterSpacing: "-0.03em",
-              textTransform: "uppercase",
-              marginBottom: "16px",
-            }}
-          >
-            {project.title}
-          </h1>
-          <p
-            style={{
-              fontSize: "15px",
-              opacity: 0.5,
-              fontWeight: 300,
-              letterSpacing: "0.02em",
-            }}
-          >
-            {project.tagline}
-          </p>
-        </div>
-
-        {project.metadata.length > 0 && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-              textAlign: "right",
-            }}
-          >
-            {project.metadata.map((item) => (
-              <div key={item.label}>
-                <div
-                  style={{
-                    fontSize: "10px",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    opacity: 0.35,
-                    marginBottom: "2px",
-                  }}
-                >
-                  {item.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: 400,
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  {item.value}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
+      {/* Title + Meta — animated */}
+      <ProjectHeroText
+        title={project.title}
+        tagline={project.tagline}
+        metadata={project.metadata}
+      />
 
       {/* Overview */}
       <section

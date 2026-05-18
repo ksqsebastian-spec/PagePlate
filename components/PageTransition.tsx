@@ -49,7 +49,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
               position: "fixed",
               inset: 0,
               zIndex: 60,
-              backgroundColor: "#1a1a1a",
+              backgroundColor: "#E9E4DF",
               transformOrigin: "bottom",
               pointerEvents: "none",
             }}
