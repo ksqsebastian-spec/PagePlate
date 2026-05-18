@@ -31,20 +31,26 @@ export default function Navbar() {
           mixBlendMode: "difference",
         }}
       >
-        <Link
-          href="/"
-          style={{
-            fontSize: "13px",
-            fontWeight: 500,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "#fff",
-            lineHeight: 1,
-            whiteSpace: "nowrap",
-          }}
+        <motion.div
+          whileHover={{ scale: 1.15 }}
+          transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          Seehafer Elemente
-        </Link>
+          <Link
+            href="/"
+            style={{
+              fontSize: "13px",
+              fontWeight: 500,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#fff",
+              lineHeight: 1,
+              whiteSpace: "nowrap",
+              display: "inline-block",
+            }}
+          >
+            Seehafer Elemente
+          </Link>
+        </motion.div>
 
         {/* Desktop nav */}
         <nav
@@ -56,20 +62,25 @@ export default function Navbar() {
           className="hidden md:flex"
         >
           {navLinks.map((link) => (
-            <Link
+            <motion.div
               key={link.href}
-              href={link.href}
-              style={{
-                fontSize: "13px",
-                fontWeight: 400,
-                letterSpacing: "0.06em",
-                color: "#fff",
-                transition: "opacity 0.15s ease",
-                opacity: pathname.startsWith(link.href) ? 1 : 0.7,
-              }}
+              whileHover={{ scale: 1.15 }}
+              transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              {link.label}
-            </Link>
+              <Link
+                href={link.href}
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 400,
+                  letterSpacing: "0.06em",
+                  color: "#fff",
+                  opacity: pathname.startsWith(link.href) ? 1 : 0.7,
+                  display: "inline-block",
+                }}
+              >
+                {link.label}
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
