@@ -42,12 +42,12 @@ export default function ProjectCard({
         style={{ width: "100%", height: "100%" }}
       >
         <Image
-          src={image + "?tr=w-600,q-70"}
+          src={image + "?tr=w-500,q-65"}
           alt={alt || title}
           fill
           loading="lazy"
           style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 50vw, 33vw"
+          sizes="(max-width: 768px) 50vw, 25vw"
         />
       </motion.div>
 

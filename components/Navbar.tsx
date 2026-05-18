@@ -54,7 +54,7 @@ export default function Navbar() {
             href="/"
             style={{
               fontSize: "13px",
-              fontWeight: 600,
+              fontWeight: 500,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "#1a1a1a",
@@ -94,7 +94,7 @@ export default function Navbar() {
                     href={link.href}
                     style={{
                       fontSize: "13px",
-                      fontWeight: isActive ? 600 : 400,
+                      fontWeight: isActive ? 500 : 400,
                       letterSpacing: "0.06em",
                       color: "#1a1a1a",
                       display: "inline-block",
