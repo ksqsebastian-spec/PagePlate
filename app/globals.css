@@ -4,12 +4,12 @@
   --color-linen: #E9E4DF;
   --color-primary: #B1A781;
   --color-secondary: #6A6243;
-  --color-ink: #000000;
+  --color-ink: #1a1a1a;
   --color-accent: #0000FF;
   --color-white: #ffffff;
 
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-body: 'Barlow', sans-serif;
+  --font-display: 'neue-montreal', sans-serif;
+  --font-body: 'neue-montreal', sans-serif;
 
   --radius-none: 0px;
   --radius-sm: 0px;
@@ -24,16 +24,29 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 body {
   background-color: #E9E4DF;
-  color: #000000;
-  font-family: 'Barlow', sans-serif;
+  color: #1a1a1a;
+  font-family: var(--font-body), 'Geist', -apple-system, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -52,19 +65,46 @@ img {
 }
 
 .em-dash::before {
-  content: '–––';
+  content: '\2014\2014\2014';
   display: block;
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
 }
 
-/* Condensed text for large display */
 .font-display {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-display), sans-serif;
 }
 
-/* Sharp rectangular selection */
 ::selection {
   background: #0000FF;
   color: #ffffff;
+}
+
+/* Text reveal animation */
+.text-reveal {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(20px);
+}
+
+.text-reveal.revealed {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+
+/* Parallax section */
+.parallax-section {
+  will-change: transform;
+}
+
+/* Smooth image loading */
+img {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .grid-cols-2-mobile {
+    grid-template-columns: 1fr !important;
+  }
 }

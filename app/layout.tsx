@@ -1,21 +1,7 @@
 import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-
-const barlow = Barlow({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const barlowCondensed = Barlow_Condensed({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
+import LenisProvider from "@/components/LenisProvider";
 
 export const metadata: Metadata = {
   title: "Seehafer Elemente | Stone & Tile Artisans",
@@ -35,20 +21,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${barlow.variable} ${barlowCondensed.variable} h-full`}
-    >
-      <body
-        className="min-h-full"
-        style={{
-          fontFamily: "var(--font-body), Barlow, sans-serif",
-          backgroundColor: "#E9E4DF",
-          color: "#000",
-        }}
-      >
-        <Navbar />
-        {children}
+    <html lang="en" className="h-full">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=neue-montreal@300,400,500,600,700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-full">
+        <LenisProvider>
+          <Navbar />
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );

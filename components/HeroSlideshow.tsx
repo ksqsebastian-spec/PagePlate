@@ -15,7 +15,7 @@ export default function HeroSlideshow({
   images,
   height = "100dvh",
   autoPlay = true,
-  interval = 4000,
+  interval = 5000,
 }: Props) {
   const [index, setIndex] = useState(0);
 
@@ -26,9 +26,6 @@ export default function HeroSlideshow({
     }, interval);
     return () => clearInterval(id);
   }, [autoPlay, images.length, interval]);
-
-  const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
-  const next = () => setIndex((i) => (i + 1) % images.length);
 
   return (
     <div
@@ -43,14 +40,14 @@ export default function HeroSlideshow({
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
           style={{ position: "absolute", inset: 0 }}
         >
           <Image
-            src={images[index]}
+            src={images[index] + "?tr=w-1680,q-80"}
             alt={`Slide ${index + 1}`}
             fill
             style={{ objectFit: "cover" }}
@@ -61,80 +58,34 @@ export default function HeroSlideshow({
       </AnimatePresence>
 
       {images.length > 1 && (
-        <>
-          {/* Prev / Next */}
-          <button
-            onClick={prev}
-            aria-label="Previous image"
-            style={{
-              position: "absolute",
-              left: "24px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 10,
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "#fff",
-              fontSize: "24px",
-              padding: "8px",
-              opacity: 0.7,
-            }}
-          >
-            ←
-          </button>
-          <button
-            onClick={next}
-            aria-label="Next image"
-            style={{
-              position: "absolute",
-              right: "24px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 10,
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "#fff",
-              fontSize: "24px",
-              padding: "8px",
-              opacity: 0.7,
-            }}
-          >
-            →
-          </button>
-
-          {/* Dots */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: "24px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              display: "flex",
-              gap: "8px",
-              zIndex: 10,
-            }}
-          >
-            {images.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                style={{
-                  width: "6px",
-                  height: "6px",
-                  borderRadius: "0",
-                  background: i === index ? "#fff" : "rgba(255,255,255,0.4)",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: 0,
-                  transition: "background 0.2s",
-                }}
-              />
-            ))}
-          </div>
-        </>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "24px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            gap: "8px",
+            zIndex: 10,
+          }}
+        >
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              style={{
+                width: i === index ? "24px" : "6px",
+                height: "2px",
+                background: i === index ? "#fff" : "rgba(255,255,255,0.4)",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                transition: "all 0.3s ease",
+              }}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

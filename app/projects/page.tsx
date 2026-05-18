@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProjectGrid from "@/components/ProjectGrid";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Projects | Seehafer Elemente",
@@ -12,11 +13,11 @@ export default function ProjectsPage() {
       <div style={{ padding: "48px 32px 32px" }}>
         <h1
           style={{
-            fontFamily: "var(--font-display), 'Barlow Condensed', sans-serif",
+            fontFamily: "var(--font-display), sans-serif",
             fontSize: "clamp(40px, 8vw, 120px)",
-            fontWeight: 600,
+            fontWeight: 500,
             lineHeight: 0.9,
-            letterSpacing: "-0.02em",
+            letterSpacing: "-0.03em",
             textTransform: "uppercase",
             marginBottom: "8px",
           }}
@@ -35,6 +36,7 @@ export default function ProjectsPage() {
         </p>
       </div>
       <ProjectGrid />
+      <Footer />
     </main>
   );
 }

@@ -3,8 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const WORDS = ["Artisan", "Seehafer", "Elemente", "Stone & Tile"];
-const INTERVAL = 2200;
+const WORDS = ["Craftsmanship", "Seehafer", "Elemente", "Stone & Tile"];
+const INTERVAL = 2400;
 
 export default function HeroCycle() {
   const [index, setIndex] = useState(0);
@@ -36,13 +36,13 @@ export default function HeroCycle() {
           exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
           style={{
-            fontFamily: "var(--font-display), 'Barlow Condensed', sans-serif",
-            fontSize: "clamp(60px, 20vw, 340px)",
-            fontWeight: 600,
+            fontFamily: "var(--font-display), sans-serif",
+            fontSize: "clamp(60px, 18vw, 300px)",
+            fontWeight: 500,
             lineHeight: 0.9,
-            letterSpacing: "-0.02em",
+            letterSpacing: "-0.03em",
             textTransform: "uppercase",
-            color: "#000",
+            color: "#1a1a1a",
             margin: 0,
             textAlign: "center",
             userSelect: "none",

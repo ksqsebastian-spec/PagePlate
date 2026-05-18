@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { getProject } from "@/lib/data/projects";
 
 type Props = {
@@ -11,7 +14,11 @@ export default function NextProjectLink({ nextSlug }: Props) {
   if (!project) return null;
 
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
       style={{
         borderTop: "1px solid rgba(0,0,0,0.1)",
         padding: "40px 32px",
@@ -28,7 +35,6 @@ export default function NextProjectLink({ nextSlug }: Props) {
       >
         <span
           style={{
-            fontFamily: "var(--font-body), Barlow, sans-serif",
             fontSize: "11px",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
@@ -39,9 +45,17 @@ export default function NextProjectLink({ nextSlug }: Props) {
           Next project
         </span>
 
-        <div style={{ position: "relative", width: "56px", height: "56px", flexShrink: 0 }}>
+        <div
+          style={{
+            position: "relative",
+            width: "56px",
+            height: "56px",
+            flexShrink: 0,
+            overflow: "hidden",
+          }}
+        >
           <Image
-            src={project.heroImages[0]}
+            src={project.heroImage + "?tr=w-120,q-70"}
             alt={project.title}
             fill
             style={{ objectFit: "cover" }}
@@ -52,7 +66,7 @@ export default function NextProjectLink({ nextSlug }: Props) {
         <div>
           <div
             style={{
-              fontFamily: "var(--font-display), 'Barlow Condensed', sans-serif",
+              fontFamily: "var(--font-display), sans-serif",
               fontSize: "clamp(24px, 4vw, 48px)",
               fontWeight: 500,
               lineHeight: 1,
@@ -80,9 +94,9 @@ export default function NextProjectLink({ nextSlug }: Props) {
             opacity: 0.4,
           }}
         >
-          →
+          &rarr;
         </span>
       </Link>
-    </section>
+    </motion.section>
   );
 }

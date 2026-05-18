@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
   { href: "/profile", label: "Profile" },
@@ -11,64 +13,123 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        padding: "20px 32px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        mixBlendMode: "normal",
-      }}
-    >
-      <Link
-        href="/"
+    <>
+      <header
         style={{
-          fontFamily: "var(--font-body), Barlow, sans-serif",
-          fontSize: "13px",
-          fontWeight: 500,
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-          color: "#000",
-          lineHeight: 1,
-          whiteSpace: "nowrap",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          padding: "20px 32px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          mixBlendMode: "difference",
         }}
       >
-        Seehafer Elemente
-      </Link>
+        <Link
+          href="/"
+          style={{
+            fontSize: "13px",
+            fontWeight: 500,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "#fff",
+            lineHeight: 1,
+            whiteSpace: "nowrap",
+          }}
+        >
+          Seehafer Elemente
+        </Link>
 
-      <nav style={{ display: "flex", gap: "32px", alignItems: "center" }}>
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
+        {/* Desktop nav */}
+        <nav
+          style={{
+            display: "flex",
+            gap: "32px",
+            alignItems: "center",
+          }}
+          className="hidden md:flex"
+        >
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              style={{
+                fontSize: "13px",
+                fontWeight: 400,
+                letterSpacing: "0.06em",
+                color: "#fff",
+                transition: "opacity 0.15s ease",
+                opacity: pathname.startsWith(link.href) ? 1 : 0.7,
+              }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "4px",
+            color: "#fff",
+            fontSize: "20px",
+          }}
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
+      </header>
+
+      {/* Mobile menu overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             style={{
-              fontFamily: "var(--font-body), Barlow, sans-serif",
-              fontSize: "13px",
-              fontWeight: 400,
-              letterSpacing: "0.06em",
-              color: pathname.startsWith(link.href) ? "#0000FF" : "#000",
-              transition: "color 0.15s ease",
-            }}
-            onMouseEnter={(e) =>
-              ((e.currentTarget as HTMLAnchorElement).style.color = "#0000FF")
-            }
-            onMouseLeave={(e) => {
-              if (!pathname.startsWith(link.href)) {
-                (e.currentTarget as HTMLAnchorElement).style.color = "#000";
-              }
+              position: "fixed",
+              inset: 0,
+              zIndex: 40,
+              backgroundColor: "#1a1a1a",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "32px",
             }}
           >
-            {link.label}
-          </Link>
-        ))}
-      </nav>
-    </header>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  fontSize: "24px",
+                  fontWeight: 500,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "#fff",
+                }}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

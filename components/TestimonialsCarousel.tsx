@@ -14,12 +14,15 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
+  if (testimonials.length === 0) return null;
+
   const navigate = (next: number) => {
     setDirection(next > index ? 1 : -1);
     setIndex(next);
   };
 
-  const prev = () => navigate((index - 1 + testimonials.length) % testimonials.length);
+  const prev = () =>
+    navigate((index - 1 + testimonials.length) % testimonials.length);
   const next = () => navigate((index + 1) % testimonials.length);
 
   const t = testimonials[index];
@@ -32,16 +35,9 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
         borderTop: "1px solid rgba(0,0,0,0.1)",
       }}
     >
-      <div
-        style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-        }}
-      >
-        {/* Counter */}
+      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         <div
           style={{
-            fontFamily: "var(--font-body), Barlow, sans-serif",
             fontSize: "12px",
             letterSpacing: "0.08em",
             marginBottom: "40px",
@@ -54,12 +50,11 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr auto",
+            gridTemplateColumns: project ? "1fr auto" : "1fr",
             gap: "40px",
             alignItems: "start",
           }}
         >
-          {/* Quote */}
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={index}
@@ -71,7 +66,6 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
             >
               <p
                 style={{
-                  fontFamily: "var(--font-body), Barlow, sans-serif",
                   fontSize: "clamp(16px, 1.4vw, 22px)",
                   lineHeight: 1.55,
                   fontWeight: 300,
@@ -79,7 +73,7 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
                   fontStyle: "italic",
                 }}
               >
-                ––– {t.quote}
+                &mdash;&mdash;&mdash; {t.quote}
               </p>
               <div>
                 <div
@@ -92,27 +86,36 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
                   {t.author}
                 </div>
                 {t.title && (
-                  <div style={{ fontSize: "13px", opacity: 0.6, marginTop: "2px" }}>
-                    {t.title}{t.company ? `, ${t.company}` : ""}
+                  <div
+                    style={{
+                      fontSize: "13px",
+                      opacity: 0.6,
+                      marginTop: "2px",
+                    }}
+                  >
+                    {t.title}
+                    {t.company ? `, ${t.company}` : ""}
                   </div>
                 )}
               </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Project thumbnail */}
           {project && (
             <Link
               href={`/projects/${project.slug}`}
-              style={{
-                display: "block",
-                width: "180px",
-                flexShrink: 0,
-              }}
+              style={{ display: "block", width: "180px", flexShrink: 0 }}
             >
-              <div style={{ position: "relative", width: "180px", height: "120px" }}>
+              <div
+                style={{
+                  position: "relative",
+                  width: "180px",
+                  height: "120px",
+                  overflow: "hidden",
+                }}
+              >
                 <Image
-                  src={project.heroImages[0]}
+                  src={project.heroImage + "?tr=w-360,q-70"}
                   alt={project.title}
                   fill
                   style={{ objectFit: "cover" }}
@@ -134,7 +137,6 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
           )}
         </div>
 
-        {/* Navigation */}
         {testimonials.length > 1 && (
           <div
             style={{
@@ -146,7 +148,6 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
             <button
               onClick={prev}
               style={{
-                fontFamily: "var(--font-body), Barlow, sans-serif",
                 fontSize: "12px",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
@@ -157,12 +158,11 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
                 opacity: 0.5,
               }}
             >
-              ← Prev
+              &larr; Prev
             </button>
             <button
               onClick={next}
               style={{
-                fontFamily: "var(--font-body), Barlow, sans-serif",
                 fontSize: "12px",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
@@ -173,7 +173,7 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
                 opacity: 0.5,
               }}
             >
-              Next →
+              Next &rarr;
             </button>
           </div>
         )}

@@ -6,220 +6,366 @@ export type Testimonial = {
   projectSlug?: string;
 };
 
+export type ProjectMeta = {
+  label: string;
+  value: string;
+};
+
 export type Project = {
   slug: string;
   title: string;
   tagline: string;
-  builder?: string;
-  architect?: string;
-  stoneSupplier?: string;
-  photographer?: string;
+  metadata: ProjectMeta[];
   overview: string;
   details: string;
-  heroImages: string[];
-  mosaicRows: string[][];
+  heroImage: string;
+  galleryImages: string[];
   testimonials: Testimonial[];
   nextProject: string;
 };
 
-// Adobe Stock IDs collected (use asset_license_and_download_stock for full-res):
-// Bathroom: 329285160, 530535166, 453278533, 602879496
-// Interior/Stone: 508619488, 362972937, 213615483, 459421783
-// Kitchen: 524589428, 520660718, 270128335, 253501966
-
-const img = (seed: string, w = 1200, h = 800) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`;
+const ik = (path: string) =>
+  `https://ik.imagekit.io/isclzlt7q/marvell-production/images/${path}`;
 
 export const projects: Project[] = [
   {
-    slug: "bergmann-residence",
-    title: "Bergmann Residence",
-    tagline: "Full interior stonework and ensuite",
-    builder: "Kessler Bau",
-    architect: "Müller Architekten",
-    stoneSupplier: "Naturstein Hoffmann",
-    photographer: "Felix Krause",
-    overview:
-      "For a private residence on Bergmannstrasse, we partnered with Kessler Bau and Müller Architekten to deliver an integrated stonework package spanning all bathrooms, the main living area, and an outdoor terrace. The project celebrates materiality and light, achieving a calm Mediterranean-inspired aesthetic throughout.",
-    details:
-      "Working closely with the architect and builder, we laid continuous Scala Travertine throughout the ground floor and extended it seamlessly to the outdoor entertaining area. Custom radius detailing around the pool coping was scribed on-site. The ensuite features hand-laid pink mosaics paired with the same travertine, creating a cohesive yet surprising palette. Every grout joint was precisely planned to align with door thresholds and cabinetry reveals.",
-    heroImages: [
-      img("bergmann-1", 1400, 900),
-      img("bergmann-2", 1400, 900),
-      img("bergmann-3", 1400, 900),
+    slug: "hubble-street",
+    title: "Hubble Street",
+    tagline: "Master Ensuite, Main Bathroom, Large Family Powder Room",
+    metadata: [
+      { label: "Builder", value: "Arklen" },
+      { label: "Architect / Designer", value: "Lahaus" },
+      { label: "Tile / Terrazzo Supplier", value: "Artedomus" },
+      { label: "Photographer", value: "Peter Ellery Photography" },
     ],
-    mosaicRows: [
-      [img("bm-a", 480, 416), img("bm-b", 240, 416), img("bm-c", 405, 416)],
-      [img("bm-d", 240, 416), img("bm-e", 240, 416), img("bm-f", 480, 416)],
+    overview:
+      "This Hubble Street home in East Fremantle marked a defining moment for Marvell Tile and Stone in Western Australia. Their first collaboration with builder Arklen, this rear extension to a heritage cottage seamlessly blends old and new, showcasing beautiful detailing, refined materiality, and the fine craftsmanship that has since become Marvell’s signature.",
+    details:
+      "Discovered by Arklen through social media soon after relocating from London, William Marvell and his team were engaged to complete this Hubble Street home’s three wet areas — a master ensuite, kids’ bathroom, and family powder room. This project became a foundation for their Western Australian practice and the start of an enduring partnership built on skill and shared standards. A refined palette of dual-format matte white wall tiles and terrazzo floors anchors each space with texture and balance. In the master ensuite, two colourways of subway tiles were laid in a vertical stack bond, establishing rhythm and order. Every surface reflects craftsmanship — mixed tile formats align perfectly at corners, grout lines run seamlessly through adjoining rooms, and symmetry is carefully maintained throughout.",
+    heroImage: ik("32250_2-1_Hskawwzb1.jpg"),
+    galleryImages: [
+      ik("DSC_0215_6G85vEGOI.jpg"),
+      ik("DSC_0259_FjBaNLFXm.jpg"),
+      ik("DSC_0295_rq02VAeDo.jpg"),
+      ik("DSC_0280_fWMiWRIIF.jpg"),
+      ik("DSC_0355-1_QJlsZGdiw.jpg"),
+      ik("DSC_0337-1__jNx8eoxz.jpg"),
+      ik("DSC_0373_T15UDw_pk.jpg"),
     ],
     testimonials: [
       {
         quote:
-          "The Seehafer team brought an extraordinary level of precision to this project. Their stonework elevated every space — the flooring alone transformed the entire ground floor.",
-        author: "Klaus Müller",
-        title: "Principal Architect",
-        company: "Müller Architekten",
-        projectSlug: "bergmann-residence",
-      },
-    ],
-    nextProject: "schiller-street",
-  },
-  {
-    slug: "schiller-street",
-    title: "Schiller Street",
-    tagline: "Exterior stone cladding and terracing",
-    builder: "Vogt Construction",
-    architect: "Bauer + Partner",
-    stoneSupplier: "Quartzwerk",
-    overview:
-      "A complete exterior stone cladding and paving project for a landmark townhouse renovation. Working with a steeply sloping site, we engineered a series of terraced stone landings that follow the natural topography while maintaining perfect level transitions at every threshold.",
-    details:
-      "The scope included over 400m² of split-face limestone cladding, hand-cut curved steps, and a new pool terrace using honed bluestone. The challenge was maintaining consistent joint alignment across all three elevations despite the irregular existing substrate. We resolved this with a custom levelling system and bespoke stainless anchors.",
-    heroImages: [
-      img("schiller-1", 1400, 900),
-      img("schiller-2", 1400, 900),
-      img("schiller-3", 1400, 900),
-    ],
-    mosaicRows: [
-      [img("sc-a", 540, 360), img("sc-b", 360, 360), img("sc-c", 360, 360)],
-      [img("sc-d", 360, 360), img("sc-e", 540, 360), img("sc-f", 360, 360)],
-    ],
-    testimonials: [
-      {
-        quote:
-          "Seehafer's understanding of natural stone is exceptional. They navigated a technically complex site with complete confidence.",
-        author: "Anna Bauer",
-        title: "Director",
-        company: "Bauer + Partner",
-        projectSlug: "schiller-street",
-      },
-    ],
-    nextProject: "munster-penthouse",
-  },
-  {
-    slug: "munster-penthouse",
-    title: "Münster Penthouse",
-    tagline: "Specialist vaulted ceiling tiling",
-    builder: "Stein & Söhne",
-    architect: "Reinhardt Studio",
-    overview:
-      "The brief for this penthouse renovation centred on a dramatic barrel-vaulted ceiling in the master suite — tiled end to end with a handmade brick-format terracotta. The curvature required every tile to be individually scribed, a process that demanded absolute patience and a steady eye across six weeks of installation.",
-    details:
-      "We developed a custom jig to hold each tile during adhesion and maintain consistent bond lines across the curve. The terracotta was sourced from a small-batch producer in Portugal and arrived with deliberate colour variation. Our installation methodology preserved and celebrated this variation, ensuring the finished vault has depth and character that a uniform tile could never achieve.",
-    heroImages: [
-      img("munster-1", 1400, 900),
-      img("munster-2", 1400, 900),
-      img("munster-3", 1400, 900),
-    ],
-    mosaicRows: [
-      [img("mn-a", 360, 540), img("mn-b", 360, 540), img("mn-c", 360, 540)],
-      [img("mn-d", 540, 360), img("mn-e", 360, 360), img("mn-f", 360, 360)],
-    ],
-    testimonials: [
-      {
-        quote:
-          "What Seehafer achieved on that vault is genuinely beyond what I believed possible at this price point. Absolute craftsmen.",
-        author: "Thomas Reinhardt",
-        title: "Creative Director",
-        company: "Reinhardt Studio",
-        projectSlug: "munster-penthouse",
-      },
-    ],
-    nextProject: "tegernsee-villa",
-  },
-  {
-    slug: "tegernsee-villa",
-    title: "Tegernsee Villa",
-    tagline: "Pool surrounds and outdoor stone",
-    builder: "Engel Projektbau",
-    architect: "Schulz & Weis Architekten",
-    stoneSupplier: "Alpine Stone Co.",
-    overview:
-      "Set against the dramatic backdrop of the Bavarian Alps, this lakeside villa required a stone program worthy of its landscape. We selected a flamed granite from a local quarry and laid it across terraces, pool surrounds, and a stepped garden path descending to the water.",
-    details:
-      "The pool coping presented a particular challenge: a freeform kidney shape requiring dozens of individually cut nosing pieces. Each was hand-scribed from a template to achieve a continuous flowing edge. The main terrace stone was bushhammered to a fine texture that provides traction without disrupting the refined aesthetic. The project was completed over two seasons to allow proper curing.",
-    heroImages: [
-      img("tegernsee-1", 1400, 900),
-      img("tegernsee-2", 1400, 900),
-      img("tegernsee-3", 1400, 900),
-    ],
-    mosaicRows: [
-      [img("tg-a", 450, 675), img("tg-b", 360, 240), img("tg-c", 360, 240)],
-      [img("tg-d", 675, 450), img("tg-e", 240, 360), img("tg-f", 360, 240)],
-    ],
-    testimonials: [
-      {
-        quote:
-          "The stonework at Tegernsee is breathtaking. Seehafer's attention to every cut and joint elevated the entire property.",
-        author: "Michaela Engel",
+          "William is incredibly meticulous and an exceptionally skilled tiler. The preparation and care taken is second to none. A clean, precise tradesman — all the hallmarks of a truly high-quality craftsman.",
+        author: "Mark Diedricks",
         title: "Managing Director",
-        company: "Engel Projektbau",
-        projectSlug: "tegernsee-villa",
+        company: "Arklen Developments",
+        projectSlug: "hubble-street",
       },
     ],
-    nextProject: "frankfurt-loft",
+    nextProject: "sewell-street",
   },
   {
-    slug: "frankfurt-loft",
-    title: "Frankfurt Loft",
-    tagline: "Contemporary kitchen and bath tiling",
-    builder: "Urban Living GmbH",
-    architect: "Studio Frei",
-    overview:
-      "A full interior tiling package for a converted commercial loft. The design language — raw concrete, blackened steel, warm timber — demanded a tile specification that felt industrial yet refined. We proposed a large-format sage green porcelain for the bathrooms and a matte white subway arrangement for the kitchen.",
-    details:
-      "Installation in a live building presented logistical challenges: no lift access, working across three levels, and coordinating with five other trades simultaneously. We scheduled tile work in 48-hour windows around plastering and joinery, keeping the project on programme. The large-format porcelain in the master bath (1200×2400mm slabs) was our most technically demanding room to date.",
-    heroImages: [
-      img("frankfurt-1", 1400, 900),
-      img("frankfurt-2", 1400, 900),
-      img("frankfurt-3", 1400, 900),
+    slug: "sewell-street",
+    title: "Sewell Street",
+    tagline: "Scala Crazy Paving Installation",
+    metadata: [
+      { label: "Client", value: "Adam Bug" },
+      { label: "Photographer", value: "Sheshells Photography" },
+      { label: "Landscape Designer", value: "Ascher Smith" },
+      { label: "Stone Supplier", value: "Eco Outdoor" },
     ],
-    mosaicRows: [
-      [img("ff-a", 480, 416), img("ff-b", 360, 416), img("ff-c", 240, 416)],
-      [img("ff-d", 675, 450), img("ff-e", 360, 360), img("ff-f", 240, 360)],
+    overview:
+      "For this East Fremantle home, Marvell Tile and Stone turned a typical Freo staircase into a fabulous travertine conversation piece. Every piece of stone was hand-scribed, pattern-matched, and mitred perfectly, transforming the ordinary into the extraordinary showing beautifully laid natural stone can make even a simple staircase unforgettable.",
+    details:
+      "The Sewell Street staircase is a remarkable demonstration of Marvell Tile and Stone’s expertise with travertine. Using Eco Outdoor’s Scala range, every piece of stone was hand-scribed and pattern-matched to create a “crazy pave” effect that is as complex as it is beautiful. Each stair was finished with mitred edges — a detail that required absolute precision, patience, and a very steady hand. Unlike standard installations, this project was approached like a reverse-engineered jigsaw puzzle, where every stone aligned through years of intuition and on-the-tools experience. With perfectly consistent grout lines, seamless placement, and a deep understanding of natural stone, Marvell Tile and Stone demonstrated that crazy paving is far from over — it just takes the right hands to make it extraordinary.",
+    heroImage: ik("DSC_3568-cropped_YHAqn7tTJ.jpg"),
+    galleryImages: [
+      ik("DSC_3568_3HmvPmxeb.jpeg"),
+      ik("DSC_3625_hox9PSiyN.jpeg"),
+      ik("DSC_4426_3wKs_6y_z.jpeg"),
+      ik("DSC_4300_lb4ZJiC3v.jpeg"),
+      ik("DSC_3571_ndVXb7HtP.jpeg"),
+      ik("DSC_3607_NpNkLojwA.jpeg"),
+      ik("DSC_4331_kd9oWKe4g.jpeg"),
+    ],
+    testimonials: [],
+    nextProject: "forrest-street",
+  },
+  {
+    slug: "forrest-street",
+    title: "Forrest Street",
+    tagline: "Natural Stone & Tiling Installation",
+    metadata: [
+      { label: "Builder", value: "Talo Constructions" },
+      { label: "Architect", value: "Space Agency Architects" },
+      { label: "Landscape Architect", value: "Rob Finnie" },
+      { label: "Photographer", value: "Ridhwaan Moola Photography" },
+    ],
+    overview:
+      "For the renovation of Carbrakine House, a 1902 Peppermint Grove manor, Marvell Tile and Stone brought heritage to life through artisanal tiling. From limestone bathrooms to terracotta exteriors, every detail was executed with precision, proving how craftsmanship and care can transform timeless architecture into something extraordinary.",
+    details:
+      "The restoration of this 1902 Peppermint Grove manor demanded a balance of heritage sensitivity and technical expertise — a challenge Marvell Tile and Stone met beautifully. Collaborating with Talo Constructions, their team delivered tiling craftsmanship of the highest calibre. Bathrooms and ensuites showcase honed limestone floors and walls, laid with perfect symmetry and razor-sharp joint alignment. The kitchen features a full-height splashback in natural stone, scribed precisely around services and joinery reveals. Outside, terracotta pavers were laid in a running bond across extensive entertaining areas, with every expansion joint concealed within the pattern.",
+    heroImage: ik(
+      "325-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS_Hy8PMlvJs.JPG"
+    ),
+    galleryImages: [
+      ik("170-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS_rd4PCWOtv.JPG"),
+      ik("387-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS_Muu0kwXNE.JPG"),
+      ik("22-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS_yK79-EzO2.JPG"),
+      ik("82-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS-1_LWQBKka3h.JPG"),
+      ik("74-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS-1_5_PrgyG1v.JPG"),
+      ik("85-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS_x1WQRiIEV.JPG"),
+      ik("330-FORRESTST-TALO-SPACEAGENCY-14JAN2025_FS_1iKv4HfOU.JPG"),
     ],
     testimonials: [
       {
         quote:
-          "Working with Seehafer was seamless. They understood the design intent immediately and delivered a flawless finish.",
-        author: "Sara Frei",
-        title: "Principal",
-        company: "Studio Frei",
-        projectSlug: "frankfurt-loft",
+          "To do anything well comes with its challenges; even the simplest tasks can be the most difficult. Marvell Tile and Stone consistently deliver craftsmanship of the highest calibre.",
+        author: "James Anderson",
+        title: "Managing Director",
+        company: "Talo Construction",
+        projectSlug: "forrest-street",
       },
     ],
-    nextProject: "weissberg-house",
+    nextProject: "ainslie-street",
   },
   {
-    slug: "weissberg-house",
-    title: "Weissberg House",
-    tagline: "Bathroom renovation and feature staircase",
-    builder: "Haas Renovierung",
-    architect: "Hoffman Wohnbau",
-    overview:
-      "A comprehensive renovation of a 1960s house in Weissberg. Our scope encompassed all four bathrooms and an extraordinary cantilevered staircase in Calacatta marble — a centrepiece that the owners had admired in a magazine for a decade and finally brought to life.",
-    details:
-      "The staircase required close coordination with the structural engineer: each tread is 50mm thick solid marble, supported by concealed steel brackets. We had to devise a method of adhering the stone treads to the steel structure without cracking during thermal movement. The solution involved custom-mixed epoxy and stainless isolation clips at each tread end — a detail we now use on all cantilevered stone stairs.",
-    heroImages: [
-      img("weissberg-1", 1400, 900),
-      img("weissberg-2", 1400, 900),
-      img("weissberg-3", 1400, 900),
+    slug: "ainslie-street",
+    title: "Ainslie Street",
+    tagline: "Internal and external stonework and ensuite",
+    metadata: [
+      { label: "Builder", value: "Red Cloud Building" },
+      { label: "Architect", value: "Robeson Architects" },
+      { label: "Stone Supplier", value: "Eco Outdoor" },
+      { label: "Photographer", value: "Dion Robeson" },
     ],
-    mosaicRows: [
-      [img("wb-a", 540, 360), img("wb-b", 360, 360), img("wb-c", 240, 360)],
-      [img("wb-d", 360, 540), img("wb-e", 480, 416), img("wb-f", 240, 416)],
+    overview:
+      "For an East Fremantle residence on Ainslie Street, we collaborated with Red Cloud Building and Robeson Architects to deliver a fully integrated stonework package. Spanning indoor and outdoor spaces, the project celebrates materiality, technical know-how, and a Mediterranean inspired aesthetic, creating a home that feels both grounded and effortless.",
+    details:
+      "For this East Fremantle home, we worked closely with Robeson Architects and Red Cloud Building to deliver the full internal and external stonework package—from main living areas to alfresco, pool surrounds, and a showstopping pink ensuite. Scala Crazy Paving was laid throughout the interiors and extended seamlessly to outdoor entertaining areas, creating a cohesive flow between indoor and outdoor living. The pool coping was hand-scribed to follow the freeform pool edge, while the ensuite features hand-laid pink mosaics paired with the same travertine, creating a cohesive yet surprising palette.",
+    heroImage: ik("Ainslie-hero-4_F1io4B-1M.jpg"),
+    galleryImages: [
+      ik("20250912_Ainslie_Robeson_DionRobeson-56_InyJ7szgM.jpg"),
+      ik("20250912_Ainslie_Robeson_DionRobeson-95_OSEMhhjoW.jpg"),
+      ik("20250912_Ainslie_Robeson_DionRobeson-101_swgx9hUsz.jpg"),
+      ik("20250912_Ainslie_Robeson_DionRobeson-105_iQw7ReNHN.jpg"),
+      ik("20250912_Ainslie_Robeson_DionRobeson-112_RJgKNBya0.jpg"),
+      ik("20250912_Ainslie_Robeson_DionRobeson-130_fP936ZTp9.jpg"),
+      ik("20250912_Ainslie_Robeson_DionRobeson-120_Ykl8IbYKT.jpg"),
     ],
     testimonials: [
       {
         quote:
-          "We had been dreaming of that staircase for years. Seehafer made it real — and it exceeded every expectation.",
-        author: "Christine Weiss",
-        title: "Home Owner",
+          "We have worked with Will and Marvell on five residential projects now and cannot recommend them highly enough. Absolute perfectionists and outstanding quality every single time.",
+        author: "Simone Robeson",
+        title: "Architect",
+        company: "Robeson Architects",
+        projectSlug: "ainslie-street",
+      },
+    ],
+    nextProject: "beach-street",
+  },
+  {
+    slug: "beach-street",
+    title: "Beach Street",
+    tagline: "Ensuite, kitchen and laundry tiling",
+    metadata: [
+      { label: "Builder", value: "Salt KB" },
+      { label: "Designer", value: "Jess O’Shea Designs" },
+      { label: "Client", value: "Brian and Judi Rudd" },
+      { label: "Photographer", value: "Jody Darcy" },
+    ],
+    overview:
+      "For this home on Beach Street in Cottesloe, Marvell Tile and Stone collaborated with award-winning designer Jess O’Shea to bring mid-century modern style to life. From terrazzo floors to mosaic splashbacks, every line and pattern is flawlessly finished, demonstrating that expert tiling can turn a beautiful design into a breathtaking reality.",
+    details:
+      "This Cottesloe abode demonstrates our signature precision and expertise in mid-century modern design. Collaborating with designer Jess O’Shea, the team focused on clean lines, flawless repetition, and absolute attention to detail to create a chic, relaxed, beachside aesthetic. This sense of rhythm is created using premium materials. In the ensuite, a combination of 150mm x 150mm tiles and mosaic feature walls demanded millimetre-perfect alignment across every surface. The kitchen splashback features handmade tiles with deliberate colour variation, installed to highlight their artisanal character while maintaining consistent grout lines. Across every surface, our team demonstrated how expert tiling and premium materials transform functional spaces into design statements.",
+    heroImage: ik("7BeachStCottesloe06-1_B2fHLj5HK.jpg"),
+    galleryImages: [
+      ik("7BeachStCottesloe07-1_FasqfDlqS.jpg"),
+      ik("7BeachStCottesloe15-1_Cnu2aPocs.jpg"),
+      ik("7BeachStCottesloe11-1_iurfGliPm.jpg"),
+      ik("7BeachStCottesloe26-1_A_DoM8tLC.jpg"),
+      ik("7BeachStCottesloe21-1_k-hv0Y0o0.jpg"),
+    ],
+    testimonials: [],
+    nextProject: "duncraig-road",
+  },
+  {
+    slug: "duncraig-road",
+    title: "Duncraig Road",
+    tagline: "Brick Slip Installation & Natural Stone Floor Tiling",
+    metadata: [
+      { label: "Builder", value: "RK Brine Master Builder" },
+      { label: "Architect", value: "Peter Moran Architect" },
+      { label: "Designer", value: "Staple Design" },
+      { label: "Photographer", value: "Maguire Imagery" },
+    ],
+    overview:
+      "Known as “Marvellangelo”, this Applecross home became the backdrop for a tiling project that tested Marvell Tile and Stone’s skill, stamina, and precision. With brick tiles laid overhead on a soaring arched ceiling, each calculation, cut, and placement became a statement of craftsmanship — a balance of artistry and engineering that few would attempt.",
+    details:
+      "For this Applecross home — nicknamed “Marvellangelo” — Marvell Tile and Stone transformed an arched ceiling into a breathtaking brick-tiled masterpiece. Precision was everything: every tile was set overhead with a consistent 6.4mm grout joint, each measure checked to maintain rhythm, symmetry, and balance across the curve. The floor tiling was equally demanding, with large-format natural stone laid across open-plan living areas with laser-straight joint alignment. Every expansion joint was concealed within the design, and the transition between indoor and outdoor surfaces is seamless.",
+    heroImage: ik("project-hero-image-4x3-1_YbVT424zo.jpg"),
+    galleryImages: [
+      ik("L1000063-HDR_uMBJZwcw3.jpg"),
+      ik("L1000013-1_tTenWtvl-.jpg"),
+      ik("L1000042-HDR_i18j8zdGW.jpg"),
+      ik("L1000060-HDR_8W0to6mSC.jpg"),
+      ik("L1000081-HDR_bw4esvyP2.jpg"),
+    ],
+    testimonials: [],
+    nextProject: "eco-outdoor",
+  },
+  {
+    slug: "eco-outdoor",
+    title: "Eco Outdoor",
+    tagline:
+      "Tiling 25 different types of stone floor tiles across more than 500m²",
+    metadata: [
+      { label: "Client", value: "Eco Outdoor" },
+      { label: "Photographer", value: "RNF Studio" },
+    ],
+    overview:
+      "Eco Outdoor, recognised as Australia’s leading supplier of natural stone and architectural materials, entrusted Marvell Tile and Stone to create their flagship showroom in Perth. With absolute precision, we transformed raw stone into harmonious, timeless surfaces, helping establish the space as a benchmark for quality in the industry.",
+    details:
+      "Being invited to install the stone flooring for Eco Outdoor, Australia’s leading supplier of natural stone and architectural materials, at their Claremont showroom marked a major milestone for Marvell Tile and Stone. Tasked with covering approximately 500m² with nearly 25 different stone types, we approached each material with the specific preparation and technique it demanded. From dense granite to delicate limestone, every stone was treated individually — bedded, levelled, and grouted to showcase its natural beauty while maintaining flawless transitions between zones.",
+    heroImage: ik("Eco-hero1_tteDCH2kp.jpg"),
+    galleryImages: [
+      ik("MarvellTile_Stone-Website-26.06.25-12_1oHTNexao.jpg"),
+      ik("MarvellTile_Stone-Website-26.06.25-45_mlAFKVStq.jpg"),
+      ik("MarvellTile_Stone-Website-26.06.25-3_G5YTtjCNe.jpg"),
+      ik("MarvellTile_Stone-Website-26.06.25-13_REmPzKsxa.jpg"),
+    ],
+    testimonials: [
+      {
+        quote:
+          "Marvell Tile and Stone installed our stone flooring with finesse. Their attention to detail was second to none and their ability to lay diverse stone types seamlessly across a large area was truly impressive.",
+        author: "Matthew Felton",
+        title: "Chief Executive",
+        company: "Eco Outdoor",
+        projectSlug: "eco-outdoor",
+      },
+    ],
+    nextProject: "excelsior-street",
+  },
+  {
+    slug: "excelsior-street",
+    title: "Excelsior Street",
+    tagline: "Ensuite, kitchen and laundry tiling",
+    metadata: [
+      { label: "Builder", value: "Talo Construction" },
+      { label: "Architect", value: "Robeson Architects" },
+      { label: "Natural Stone Supplier", value: "Bernini" },
+      { label: "Photographer", value: "Ridhwaan Moola Photography" },
+    ],
+    overview:
+      "At this contemporary Shenton Park residence, Marvell Tile and Stone partnered with Talo Construction and Robeson Architects to showcase tiling as an art of precision. Spanish limestone flows seamlessly from interior to poolside, with every joint and junction perfectly aligned — a masterclass in technical execution and design sensitivity.",
+    details:
+      "For this premium home, designed by Simone Robeson, Marvell Tile and Stone brought Spanish limestone from Bernini to life through incredible craftsmanship. The process began at the front alfresco, anchored with a full tile, then extended through entry, hallways, ensuites, and out to the pool’s edge — maintaining perfect joint alignment across every threshold and change in level. The kitchen island features a waterfall edge in the same stone, with mitred corners that are virtually invisible. The pool surround demanded particular precision, with every coping piece scribed to follow the geometric pool shape while maintaining consistent overhang and drip detail.",
+    heroImage: ik(
+      "176-TALOCONSTRUCTION-74EXCELSIORST-SHENTONPARK-11APR2025_hero_YFLzGUuLj.jpg"
+    ),
+    galleryImages: [
+      ik(
+        "176-TALOCONSTRUCTION-74EXCELSIORST-SHENTONPARK-11APR2025_b-Vw4g_CY.JPG"
+      ),
+      ik(
+        "17-TALOCONSTRUCTION-74EXCELSIORST-SHENTONPARK-11APR2025_rM3Ks_t7e.JPG"
+      ),
+      ik("MarvellTile_Stone-09.04.25-49_tq7znmvGu.jpg"),
+      ik(
+        "106-TALOCONSTRUCTION-74EXCELSIORST-SHENTONPARK-11APR2025_5zxhpV9HH.JPG"
+      ),
+      ik(
+        "235-TALOCONSTRUCTION-74EXCELSIORST-SHENTONPARK-11APR2025_V_rWSrefw.JPG"
+      ),
+      ik(
+        "206-TALOCONSTRUCTION-74EXCELSIORST-SHENTONPARK-11APR2025_SDyLZQIpN.JPG"
+      ),
+      ik(
+        "110-TALOCONSTRUCTION-74EXCELSIORST-SHENTONPARK-11APR2025_vQr5Z9hsZ.JPG"
+      ),
+    ],
+    testimonials: [
+      {
+        quote:
+          "Marvell Tile and Stone installed the stone with finesse. Their attention to detail was second to none and their ability to maintain perfect alignment across the entire home was truly impressive.",
+        author: "Simone Robeson",
+        title: "Architect",
+        company: "Robeson Architects",
+        projectSlug: "excelsior-street",
+      },
+    ],
+    nextProject: "st-leonards-ave",
+  },
+  {
+    slug: "st-leonards-ave",
+    title: "St Leonards Ave",
+    tagline: "Natural Stone, Paving and Pool Wrap",
+    metadata: [
+      { label: "Client", value: "Nicole Moody" },
+      { label: "Landscape Construction", value: "Werd Landscapes" },
+      { label: "Designer", value: "Mon Palmer" },
+      { label: "Photographer", value: "Sheshells Photography" },
+    ],
+    overview:
+      "In West Leederville, Marvell Tile and Stone created outdoor spaces to die for — from defining limestone tiling and French-pattern floors to seamless pool detailing. Reflecting the Western Australian way of living, the project also showcases technical excellence, innovative problem-solving and the artistry of natural stone at its very best.",
+    details:
+      "For the outdoor areas and alfresco spaces of this West Leederville home, Marvell Tile and Stone collaborated with designer Mon Palmer and Werd Landscapes. William and the team laid natural limestone tiles in a classic French pattern across expansive outdoor living areas. The pool became the centrepiece of the design — with coping pieces hand-scribed to follow the geometric pool shape, maintaining consistent overhang and drip detail. Every expansion joint was concealed within the pattern, and the transition between paved areas and garden beds is seamless.",
+    heroImage: ik("DSC_8846_qQYBah9oW.jpeg"),
+    galleryImages: [
+      ik("DSC_8864-1_LihDVP5_0.jpeg"),
+      ik("DSC_8918_EbTlfzyOf.jpeg"),
+      ik("DSC_8889_s4vaHK4LH.jpeg"),
+      ik("DSC_8953_3P1lOKATO.jpeg"),
+      ik("DSC_8976_OnEXm9dP_.jpeg"),
+      ik("DSC_8962_ik_r4CXzK.jpeg"),
+    ],
+    testimonials: [
+      {
+        quote:
+          "We engaged Will to undertake a complex paving job in our backyard using natural limestone. His attention to detail, quality of workmanship, and friendly attitude was outstanding.",
+        author: "Nicole Moody",
+        title: "Owner",
         company: "",
-        projectSlug: "weissberg-house",
+        projectSlug: "st-leonards-ave",
       },
     ],
-    nextProject: "bergmann-residence",
+    nextProject: "vivaldi-drive",
+  },
+  {
+    slug: "vivaldi-drive",
+    title: "Vivaldi Drive",
+    tagline: "Full House Tiling Installation",
+    metadata: [
+      { label: "Builder", value: "Arklen" },
+      { label: "Tile Supplier", value: "InStyle Ceramics" },
+      { label: "Photographer", value: "Peter Ellery Photography" },
+    ],
+    overview:
+      "Marvell Tile and Stone brought precision and skill to this Mandurah home, working alongside Arklen and interior designer Jess O’Shea. From bathrooms to kitchen, laundry, and balcony, every surface was precisely tiled — proof that clean lines, seamless finishes, and uncompromising detail are what set exceptional tiling apart.",
+    details:
+      "Marvell Tile and Stone had the privilege of collaborating with Arklen Developments and designer Jess O’Shea on a carefully considered Mandurah home. Entrusted with tiling throughout, the team managed screed, waterproofing, and the installation of tiles across the main bathroom, ensuite, powder room, kitchen, laundry, and balcony. Every surface was approached with the same level of precision — from large-format floor tiles laid with laser-straight joint alignment to intricate mosaic feature walls in the bathrooms. The kitchen splashback features a subtle textured tile that catches the light differently throughout the day.",
+    heroImage: ik("Vivaldi_LRs09_HUvS8VBnJ.jpg"),
+    galleryImages: [
+      ik("Vivaldi_LRs09-1_JSkSsVqfq.jpg"),
+      ik("Vivaldi_LRs12_W0tHRxDcE.jpg"),
+      ik("Vivaldi_LRs32_QPio70aQI.jpg"),
+      ik("Vivaldi_LRs22_gvRTcutw2.jpg"),
+      ik("Vivaldi_LRs16-1_sd2VTiaoO.jpg"),
+      ik("Vivaldi_LRs37-1_b8_B3KMJh.jpg"),
+      ik("Vivaldi_LRs05-1_9VIJw-z0e.jpg"),
+    ],
+    testimonials: [
+      {
+        quote:
+          "William is incredibly meticulous and an exceptionally skilled tiler. The preparation and care taken is second to none. A clean, precise tradesman — all the hallmarks of a truly high-quality craftsman.",
+        author: "Mark Diedricks",
+        title: "Managing Director",
+        company: "Arklen Developments",
+        projectSlug: "vivaldi-drive",
+      },
+    ],
+    nextProject: "hubble-street",
   },
 ];
 

@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 import type { Service } from "@/lib/data/services";
 
 type Props = {
@@ -7,7 +10,11 @@ type Props = {
 
 export default function ServiceSection({ service }: Props) {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       style={{
         padding: "64px 0",
         borderTop: "1px solid rgba(0,0,0,0.1)",
@@ -21,11 +28,9 @@ export default function ServiceSection({ service }: Props) {
           alignItems: "start",
         }}
       >
-        {/* Left: Title + description */}
         <div>
           <h3
             style={{
-              fontFamily: "var(--font-body), Barlow, sans-serif",
               fontSize: "clamp(20px, 2vw, 28px)",
               fontWeight: 400,
               letterSpacing: "-0.01em",
@@ -48,7 +53,6 @@ export default function ServiceSection({ service }: Props) {
           </p>
         </div>
 
-        {/* Right: 2x2 image grid */}
         <div
           style={{
             display: "grid",
@@ -66,7 +70,7 @@ export default function ServiceSection({ service }: Props) {
               }}
             >
               <Image
-                src={src}
+                src={src + "?tr=w-480,q-75"}
                 alt={`${service.title} ${i + 1}`}
                 fill
                 style={{ objectFit: "cover" }}
@@ -76,6 +80,6 @@ export default function ServiceSection({ service }: Props) {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

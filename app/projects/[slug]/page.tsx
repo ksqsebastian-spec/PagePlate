@@ -2,6 +2,7 @@ import HeroSlideshow from "@/components/HeroSlideshow";
 import NextProjectLink from "@/components/NextProjectLink";
 import ProjectMosaic from "@/components/ProjectMosaic";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import Footer from "@/components/Footer";
 import { getProject, projects } from "@/lib/data/projects";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -29,17 +30,16 @@ export default async function ProjectPage({ params }: Props) {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const metaItems = [
-    project.builder && { label: "Builder", value: project.builder },
-    project.architect && { label: "Architect", value: project.architect },
-    project.stoneSupplier && { label: "Stone Supplier", value: project.stoneSupplier },
-    project.photographer && { label: "Photographer", value: project.photographer },
-  ].filter(Boolean) as { label: string; value: string }[];
+  // Build hero images array: hero + first 2 gallery images for slideshow
+  const heroImages = [
+    project.heroImage,
+    ...project.galleryImages.slice(0, 2),
+  ];
 
   return (
     <main>
       {/* Hero slideshow */}
-      <HeroSlideshow images={project.heroImages} height="100dvh" />
+      <HeroSlideshow images={heroImages} height="100dvh" />
 
       {/* Title + Meta */}
       <section
@@ -55,11 +55,11 @@ export default async function ProjectPage({ params }: Props) {
         <div>
           <h1
             style={{
-              fontFamily: "var(--font-display), 'Barlow Condensed', sans-serif",
+              fontFamily: "var(--font-display), sans-serif",
               fontSize: "clamp(48px, 10vw, 140px)",
-              fontWeight: 600,
+              fontWeight: 500,
               lineHeight: 0.9,
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.03em",
               textTransform: "uppercase",
               marginBottom: "16px",
             }}
@@ -78,8 +78,7 @@ export default async function ProjectPage({ params }: Props) {
           </p>
         </div>
 
-        {/* Meta info */}
-        {metaItems.length > 0 && (
+        {project.metadata.length > 0 && (
           <div
             style={{
               display: "flex",
@@ -88,7 +87,7 @@ export default async function ProjectPage({ params }: Props) {
               textAlign: "right",
             }}
           >
-            {metaItems.map((item) => (
+            {project.metadata.map((item) => (
               <div key={item.label}>
                 <div
                   style={{
@@ -130,13 +129,13 @@ export default async function ProjectPage({ params }: Props) {
             fontWeight: 300,
           }}
         >
-          ––– {project.overview}
+          &mdash;&mdash;&mdash; {project.overview}
         </p>
       </section>
 
       {/* Image Mosaic */}
       <section style={{ padding: "0 0 2px" }}>
-        <ProjectMosaic rows={project.mosaicRows} />
+        <ProjectMosaic images={project.galleryImages} />
       </section>
 
       {/* Testimonials */}
@@ -154,7 +153,6 @@ export default async function ProjectPage({ params }: Props) {
       >
         <h2
           style={{
-            fontFamily: "var(--font-body), Barlow, sans-serif",
             fontSize: "11px",
             fontWeight: 500,
             letterSpacing: "0.1em",
@@ -178,6 +176,7 @@ export default async function ProjectPage({ params }: Props) {
 
       {/* Next Project */}
       <NextProjectLink nextSlug={project.nextProject} />
+      <Footer />
     </main>
   );
 }

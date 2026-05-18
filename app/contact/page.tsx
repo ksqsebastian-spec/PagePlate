@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   description: "Get in touch with Seehafer Elemente — stone and tile artisans.",
 };
 
+const ik = (path: string) =>
+  `https://ik.imagekit.io/isclzlt7q/marvell-production/images/${path}`;
+
+const contactHero = ik(
+  "bad8fdd3786e6b872fb2a83eaf79b1d8a018a6d5_LbzsasWfc.jpg"
+);
+
 export default function ContactPage() {
   return (
     <main
@@ -18,7 +25,7 @@ export default function ContactPage() {
       {/* Left: image */}
       <div style={{ position: "relative", overflow: "hidden" }}>
         <Image
-          src="https://picsum.photos/seed/contact-hero/1000/1000"
+          src={contactHero + "?tr=w-1000,q-80"}
           alt="Seehafer Elemente craftsmanship"
           fill
           style={{ objectFit: "cover" }}
@@ -38,11 +45,11 @@ export default function ContactPage() {
       >
         <h1
           style={{
-            fontFamily: "var(--font-display), 'Barlow Condensed', sans-serif",
+            fontFamily: "var(--font-display), sans-serif",
             fontSize: "clamp(40px, 6vw, 96px)",
-            fontWeight: 600,
+            fontWeight: 500,
             lineHeight: 0.9,
-            letterSpacing: "-0.02em",
+            letterSpacing: "-0.03em",
             textTransform: "uppercase",
             marginBottom: "32px",
           }}
@@ -82,7 +89,7 @@ export default function ContactPage() {
               style={{
                 fontSize: "18px",
                 fontWeight: 400,
-                color: "#000",
+                color: "#1a1a1a",
                 letterSpacing: "0.02em",
                 textDecoration: "none",
               }}
@@ -108,12 +115,40 @@ export default function ContactPage() {
               style={{
                 fontSize: "18px",
                 fontWeight: 400,
-                color: "#000",
+                color: "#1a1a1a",
                 letterSpacing: "0.02em",
                 textDecoration: "none",
               }}
             >
               hello@seehafer-elemente.de
+            </a>
+          </div>
+
+          <div>
+            <div
+              style={{
+                fontSize: "10px",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                opacity: 0.35,
+                marginBottom: "4px",
+              }}
+            >
+              Instagram
+            </div>
+            <a
+              href="https://instagram.com/seehafer.elemente"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontSize: "18px",
+                fontWeight: 400,
+                color: "#1a1a1a",
+                letterSpacing: "0.02em",
+                textDecoration: "none",
+              }}
+            >
+              @seehafer.elemente
             </a>
           </div>
         </div>
@@ -128,7 +163,7 @@ export default function ContactPage() {
             opacity: 0.35,
           }}
         >
-          © {new Date().getFullYear()} Seehafer Elemente
+          &copy; {new Date().getFullYear()} Seehafer Elemente
         </div>
       </div>
     </main>

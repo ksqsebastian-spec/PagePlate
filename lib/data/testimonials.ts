@@ -3,34 +3,34 @@ import type { Testimonial } from "./projects";
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Seehafer is incredibly meticulous and an exceptionally skilled stone artisan. The preparation and care taken is second to none. A clean, precise tradesman — all the hallmarks of a truly high-quality craftsman.",
-    author: "Max Kessler",
+      "William is incredibly meticulous and an exceptionally skilled tiler. The preparation and care taken is second to none. A clean, precise tradesman — all the hallmarks of a truly high-quality craftsman.",
+    author: "Mark Diedricks",
     title: "Managing Director",
-    company: "Kessler Bau",
-    projectSlug: "bergmann-residence",
+    company: "Arklen Developments",
+    projectSlug: "hubble-street",
   },
   {
     quote:
-      "We have worked with Seehafer Elemente on four residential projects now and cannot recommend them highly enough. Absolute perfectionists and outstanding quality every single time.",
-    author: "Anna Bauer",
-    title: "Director",
-    company: "Bauer + Partner",
-    projectSlug: "schiller-street",
+      "We have worked with Will and Marvell on five residential projects now and cannot recommend them highly enough. Absolute perfectionists and outstanding quality every single time.",
+    author: "Simone Robeson",
+    title: "Architect",
+    company: "Robeson Architects",
+    projectSlug: "ainslie-street",
   },
   {
     quote:
-      "We engaged Seehafer to undertake a complex stonework project in our garden using natural limestone. Their attention to detail, quality of workmanship, and friendly attitude was outstanding.",
-    author: "Christine Weiss",
-    title: "Home Owner",
+      "We engaged Will to undertake a complex paving job in our backyard using natural limestone. His attention to detail, quality of workmanship, and friendly attitude was outstanding.",
+    author: "Nicole Moody",
+    title: "Owner",
     company: "",
-    projectSlug: "weissberg-house",
+    projectSlug: "st-leonards-ave",
   },
   {
     quote:
-      "Seehafer Elemente has been our preferred stone and tile contractor for over three years across a range of high-end architectural builds. Their attention to detail is exemplary and the quality is consistently the highest standard.",
-    author: "Thomas Reinhardt",
-    title: "Creative Director",
-    company: "Reinhardt Studio",
-    projectSlug: "munster-penthouse",
+      "Marvell Tile and Stone consistently deliver craftsmanship of the highest calibre. To do anything well comes with its challenges; even the simplest tasks can be the most difficult.",
+    author: "James Anderson",
+    title: "Managing Director",
+    company: "Talo Construction",
+    projectSlug: "forrest-street",
   },
 ];
